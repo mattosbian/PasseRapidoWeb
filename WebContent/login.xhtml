@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/common.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:spacer width="200" height="10" />
+
+
+			<p:panelGrid columns="2" styleClass="fundoSaldo">
+
+				<p:outputLabel value="CPF" for="itCpf" />
+				<p:inputText id="itCpf" required="true" value="#{loginMBean.login.cpf}" requiredMessage="Cpf deve ser informado" />
+
+				<p:outputLabel value="Senha" for="itSenha" />
+				<p:inputText id="itSenha" required="true"
+					value="#{loginMBean.login.senha}"  requiredMessage="Senha deve ser informada"/>
+
+				<p:commandButton value="Salvar" styleClass="btnEntrar"
+					action="#{loginMBean.realizarLogin}" />
+
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+
+</html>

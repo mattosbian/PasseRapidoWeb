@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+  <ui:composition template="/template/common.xhtml">
+   
+     <ui:define name="body">
+       
+       	<h5>Extrato</h5>
+
+        <h:panelGrid columns="4">
+           <p:outputLabel value="Veículo" styleClass="outputLabel"/>
+        
+        <h:panelGrid columns="2">
+           <p:selectOneMenu>
+              <f:selectItem itemLabel="Placa"/>
+           </p:selectOneMenu>
+           
+           <h:panelGrid columns="2">
+              <p:outputLabel value="Tag" styleClass="outputLabel"/>
+              <p:outputLabel value="Numero"/>
+           </h:panelGrid>
+           
+        </h:panelGrid>
+        
+        <p:spacer width="500" height="10"> </p:spacer>
+        
+         <h:panelGrid columns="1">
+           <p:outputLabel value="Saldo Atual" styleClass="outputLabel"/>
+           <p:outputLabel value="100" styleClass="outputSaldo"/>
+        </h:panelGrid>  
+      
+        </h:panelGrid>  
+        
+        
+        <p:panel header="Filtros">
+     
+
+
+			<h:panelGrid columns="3">
+			
+			    <p:outputLabel value="Tipo Transação" styleClass="outputLabel"/>
+			    <p:outputLabel value="Período" styleClass="outputLabel"/>
+			    <h:outputLabel/>
+
+			 
+			    
+			    <p:selectOneMenu>
+			      <f:selectItem itemLabel="Selecione"/>
+			      <f:selectItem itemLabel="Recarga"/>
+			      <f:selectItem itemLabel="Pedagio"/>
+			      <f:selectItem itemLabel="Estacionamento"/>	
+			    </p:selectOneMenu>			    
+			    
+			    <p:selectOneMenu>
+			      <f:selectItem itemLabel="Ultimas Transações" styleClass="outputLabel"/>
+			    </p:selectOneMenu>	
+			    
+			    <p:button value="filtrar" styleClass="btnMigrarPlano"></p:button>		    
+			 </h:panelGrid>   
+   </p:panel>
+			
+			<p:dataTable>
+			   <p:column headerText="Data Lançamento"/>
+			   <p:column headerText="Descrição Lançamento"/>
+			   <p:column headerText="Crédito"/>
+			   <p:column headerText="Débito"/>
+			   <p:column headerText="Saldo"/>
+			</p:dataTable>
+                  
+     </ui:define>
+  </ui:composition>
+
+
+
+</html>
