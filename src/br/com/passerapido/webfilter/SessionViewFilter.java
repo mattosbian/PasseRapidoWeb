@@ -22,14 +22,13 @@ public class SessionViewFilter implements Filter {
      * Default constructor. 
      */
     public SessionViewFilter() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -43,9 +42,7 @@ public class SessionViewFilter implements Filter {
 			
 			chain.doFilter(request, response);			
 			
-		} catch (IOException e) {
-			throw e;
-		}catch (ServletException e) {
+		} catch (ServletException e) {
 			throw e;
 		}finally {
 			EntityManagerUtil.closeEntityManager();			
@@ -56,7 +53,7 @@ public class SessionViewFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+
 	}
 
 }
