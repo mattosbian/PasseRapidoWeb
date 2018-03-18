@@ -55,8 +55,7 @@ public class Cadastro {
 
 
 	public void salvar() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }
