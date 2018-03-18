@@ -2,7 +2,8 @@ package br.com.passerapido.mbean;
 
 import java.io.Serializable;
 
-import javax.annotation.ManagedBean;
+
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.passerapido.dominio.Cadastro;

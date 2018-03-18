@@ -1,18 +1,15 @@
 package br.com.passerapido.mbean;
 
-import java.io.Serializable;
-
-import javax.annotation.ManagedBean;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-
 import br.com.passerapido.dominio.Login;
 import br.com.passerapido.exception.LoginException;
 import br.com.passerapido.util.JsfUtil;
 
-@ManagedBean("loginMBean")
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import java.io.Serializable;
+
+@ManagedBean(name = "loginMBean")
 @RequestScoped
 public class LoginMBean implements Serializable{
 
