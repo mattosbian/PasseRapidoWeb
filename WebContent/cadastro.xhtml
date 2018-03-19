@@ -40,12 +40,16 @@
            <p:outputLabel value="Nome Completo Mãe" for="itNomeMae"/>
            
            
-           <p:selectOneMenu id="cbSexo">
-             <f:selectItem itemLabel="Sexo"/>
+           <p:selectOneMenu id="cbSexo" value="#{cadastroMBean.cadastro.tbGenero}">
+             <f:selectItem itemLabel="Selecione" itemValue=""/>
+             <f:selectItems value="#{cadastroMBean.tbGeneros}" var="tbGenero" 
+             	itemLabel="#{tbGenero.dsGenero}" itemValue="#{tbGenero}" />
            </p:selectOneMenu>
            
-           <p:selectOneMenu id="cbEstadoCivil">
+           <p:selectOneMenu id="cbEstadoCivil" value="#{cadastroMBean.cadastro.tbEstadoCivil}">
              <f:selectItem itemLabel="Estado Civil"/>
+             <f:selectItems value="#{cadastroMBean.tbEstadosCivis}" var="tbEstadoCivil" 
+             	itemLabel="#{tbEstadoCivil.dsEstadoCivil}" itemValue="#{tbEstadoCivil}" />
            </p:selectOneMenu>
            
            <p:inputText id="itNomeMae"/>

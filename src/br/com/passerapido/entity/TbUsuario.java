@@ -37,6 +37,7 @@ public class TbUsuario implements Serializable{
 	@Column(name="ds_senha")
 	private String dsSenha;
 
+	
 	public BigDecimal getCdUsuario() {
 		return cdUsuario;
 	}
@@ -44,8 +45,6 @@ public class TbUsuario implements Serializable{
 	public void setCdUsuario(BigDecimal cdUsuario) {
 		this.cdUsuario = cdUsuario;
 	}
-
-	
 	
 	public String getNmUsuario() {
 		return nmUsuario;

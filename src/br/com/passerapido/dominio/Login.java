@@ -15,8 +15,6 @@ public class Login {
 	private long cpf;
 	private String senha;
 	
-	
-	
 	public Login() {
 	}
 
@@ -29,11 +27,9 @@ public class Login {
 			query.setParameter("senha", senha);
 			tbUsuario = (TbUsuario) query.getSingleResult();
 		} catch (NoResultException e) {
-			throw new LoginException("Cpf ou senha inválida",e);
-		
+			throw new LoginException("Não existem Generos",e);
 		}
 				
-			
 	}
 	
 	

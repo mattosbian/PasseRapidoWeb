@@ -12,11 +12,11 @@
 		<h:form>
 			<p:spacer width="200" height="10" />
 
-
 			<p:panelGrid columns="2" styleClass="fundoSaldo">
 
 				<p:outputLabel value="CPF" for="itCpf" />
-				<p:inputText id="itCpf" required="true" value="#{loginMBean.login.cpf}" requiredMessage="Cpf deve ser informado" />
+				<p:inputText id="itCpf" required="true" value="#{loginMBean.login.cpf}" 
+					requiredMessage="Cpf deve ser informado" />
 
 				<p:outputLabel value="Senha" for="itSenha" />
 				<p:inputText id="itSenha" required="true"

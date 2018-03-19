@@ -36,9 +36,7 @@ public class SessionViewFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
 		try {
-			
 			EntityManagerUtil.createEntityManager(request.getServletContext());
 			
 			chain.doFilter(request, response);			
@@ -48,8 +46,10 @@ public class SessionViewFilter implements Filter {
 		}catch (ServletException e) {
 			throw e;
 		}finally {
+
 			EntityManagerUtil.closeEntityManager();			
 		}
+
 	}
 
 	/**

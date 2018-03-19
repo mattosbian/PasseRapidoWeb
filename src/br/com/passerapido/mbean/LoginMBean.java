@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -30,12 +29,11 @@ public class LoginMBean implements Serializable{
 		
 	}
 	
-	
-
-	
 	public String realizarLogin() {
 		try {
 			login.entrarNoSistema();
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", login);
+			System.out.println("loginBean : " + login.getCpf());
 			return "welcome?faces-redirect=true";
 		} catch (LoginException e) {
 			JsfUtil.addMensagem(e.getMessage());
@@ -44,15 +42,9 @@ public class LoginMBean implements Serializable{
 		}
 	}
 
-
-
-
 	public Login getLogin() {
 		return login;
 	}
-
-
-
 
 	public void setLogin(Login login) {
 		this.login = login;
