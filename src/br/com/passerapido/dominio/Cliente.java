@@ -35,7 +35,7 @@ public class Cliente {
 	
 	private String senha;	//VARCHAR2(50 BYTE)
 
-	private Endereco endereco;
+	//private Endereco endereco;
 	
 	//private ContaBancaria contaBancaria; //ja estava
 	
@@ -66,10 +66,9 @@ public class Cliente {
 	}
 
 
-	public Endereco getEndereco() {
-
-		return endereco;
-	}
+//	public Endereco getEndereco() {
+//		return endereco;
+//	}
 	
 	
 	public boolean isNovo() {
