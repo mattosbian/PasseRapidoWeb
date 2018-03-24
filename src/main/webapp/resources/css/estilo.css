@@ -1,0 +1,117 @@
+#container {
+	margin: 0 auto;
+	width: 940px;
+}
+
+.menuCliente {
+	padding-bottom: 5px;
+	background: url("#{resource['imagens/bgContentHome.png']}") repeat-x 0 bottom;
+	height: 64px;
+	margin-top: 40px;
+}
+
+.menuCliente ul {
+	width: 900px;
+	height: 66px;
+	display: block;
+	background: url("#{resource['imagens/bgMenuCliente.png']}") center 0 repeat-x;
+	position: relative;
+	margin: 0;
+}
+
+.menuCliente ul li {
+	height: 66px;
+	float: left;
+	display: block;
+	margin: 0;
+	padding-left: 20px;
+	padding-left: 15px;
+}
+
+.menuCliente ul li a {
+	text-indent: -99999px;
+	height: 41px;
+	display: block;
+	float: left;
+	margin-top: 13px;
+}
+
+.menuCliente ul li.ativo a, .menuCliente ul li a:hover {
+    background-position: 0 -41px;
+    background-position-x: 0px;
+    background-position-y: -41px;
+}
+
+.btnHome {
+	background: url("#{resource['imagens/01menuClienteHome.png']}") 0 0;
+	width: 31px;
+}
+
+.btnExtrato {
+	background: url("#{resource['imagens/03menuClienteExtrato.png']}") 0 0;
+	width: 38px;
+}
+
+.btnCadastro {
+	background: url("#{resource['imagens/08menuClienteCadastro.png']}") 0 0;
+	width: 74px;
+}
+
+.btnLancamento {
+	background: url("#{resource['imagens/02menuClienteRecargaOnline.png']}") 0 0;
+	width: 100px;
+}
+
+
+#container h5 {
+	font-size: 27px;
+	font-weight: 700;
+	height: 30px;
+	margin-bottom: 5px;
+	width: 889px;
+	color: #172e5f;
+	border: 0;
+	text-decoration: none;
+	list-style: none;
+	font-family: 'Raleway', sans-serif;
+}
+
+
+.outputLabel {
+	color:black;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+}
+
+.outputSaldo {
+	color:black;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	font-size: 26px;
+}
+
+
+
+.ui-panelgrid td  {
+    border-width: 1px;
+    border-style: none !important;
+    border-color: inherit;
+    padding: 4px 10px;
+}
+
+
+.ui-panelgrid {
+    border-collapse: inherit!important;
+}
+
+.btnEntrar {
+    background: #f46e29 !important;
+    color: #ffffff !important;
+    font-weight:normal !important;
+    text-shadow:none !important; 
+}
+
+
+.fundoSaldo td {
+	background: url("#{resource['imagens/bgExtratoMigrar.png']}") 0 0;
+}
