@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="TB_VEICULO")
-@SequenceGenerator(name="TbVeiculoCd", sequenceName="SQ_TB_VEICULO_CD")
+@SequenceGenerator(name="TbVeiculoCd", sequenceName="SQ_TB_VEICULO_CD",initialValue=1,allocationSize=1)
 public class TbVeiculo {
 
 	@Id

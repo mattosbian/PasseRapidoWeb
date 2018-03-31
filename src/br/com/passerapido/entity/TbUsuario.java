@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name="TB_USUARIO")
 @NamedQueries( {
 		@NamedQuery(name=TbUsuario.POR_CPF_SENHA, query="Select t From TbUsuario t where t.nrCpf = :cpf and t.dsSenha=:senha")

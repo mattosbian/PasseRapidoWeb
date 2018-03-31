@@ -29,8 +29,6 @@ public class Cadastro {
 		
 		this.tbGeneros = listaTbGenero();
 		this.tbEstadosCivis = listaTbEstadoCivil();
-		
-		System.out.println("Cadastro construtor genero :" + this.tbGeneros.size());
 	}
 	
 	public Cliente getCliente() {

@@ -13,8 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="tb_cliente")
-@SequenceGenerator(name="tbClienteId", sequenceName="SQ_TB_CLIENTE_ID")
+@Table(name="TB_CLIENTE")
+@SequenceGenerator(name="tbClienteId", sequenceName="SQ_TB_CLIENTE_ID",initialValue=1,allocationSize=1)
 public class TbCliente {
 
 	@Id
