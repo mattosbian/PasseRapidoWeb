@@ -4,16 +4,15 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name="TB_USUARIO")
 @NamedQueries( {
-		@NamedQuery(name= TbUsuario.POR_CPF_SENHA, query="Select t From TbUsuario t where t.nrCpf = :cpf and t.dsSenha=:senha")
+		@NamedQuery(name=TbUsuario.POR_CPF_SENHA, query="Select t From TbUsuario t where t.nrCpf = :cpf and t.dsSenha=:senha")
 })
 public class TbUsuario implements Serializable{
 
@@ -37,6 +36,7 @@ public class TbUsuario implements Serializable{
 	@Column(name="ds_senha")
 	private String dsSenha;
 
+	
 	public BigDecimal getCdUsuario() {
 		return cdUsuario;
 	}
@@ -44,8 +44,6 @@ public class TbUsuario implements Serializable{
 	public void setCdUsuario(BigDecimal cdUsuario) {
 		this.cdUsuario = cdUsuario;
 	}
-
-	
 	
 	public String getNmUsuario() {
 		return nmUsuario;

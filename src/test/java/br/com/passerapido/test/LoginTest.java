@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest{
 
         Login login = new Login();
 
-            login.setCpf(123456);
+            login.setCpf("123456");
             login.setSenha("");
             login.entrarNoSistema();
 
