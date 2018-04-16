@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/common.xhtml">
+
+	<ui:define name="body">
+
+		<h5>Recarga</h5>
+
+		<h:form>
+
+		<h:panelGrid columns="3" id="panelGeral">
+
+
+			<p:outputLabel value="Veículo" styleClass="outputLabel" />
+			<p:outputLabel value="Tag" styleClass="outputLabel" for="itTag"/>
+			<p:outputLabel value="Saldo Atual" styleClass="outputLabel" for="itSaldoAtual" />
+
+			<p:selectOneMenu id="cbPlaca" value="#{lancamentoMBean.tag}"
+				converter="TagToString">
+				<f:selectItem itemLabel="Selecione Placa" itemValue="" />
+				<f:selectItems value="#{lancamentoMBean.tags}" var="tag"
+					itemLabel="#{tag.veiculo.nrPlaca}" itemValue="#{tag}" />
+				<p:ajax event="change" update="itTag itSaldoAtual" process="cbPlaca" />
+			</p:selectOneMenu>
+
+			<p:inputText value="#{lancamentoMBean.tag.cdTag}" id="itTag" disabled="true" />
+			<p:inputText value="#{lancamentoMBean.tag.vlSaldo}" id="itSaldoAtual" disabled="true" />
+
+
+
+			<p:outputLabel value="Valor" styleClass="outputLabel" for="itValor" />
+			<p:outputLabel />
+			<p:outputLabel />
+
+			<p:inputText id="itValor" value="#{lancamentoMBean.valorRecarga}" />
+			<p:outputLabel />
+			<p:outputLabel />
+
+			<p:commandButton value="Recarregar" styleClass="btnEntrar" action="#{lancamentoMBean.recarregar}" update="@form"/>
+
+			<p:button value="Sair" styleClass="btnEntrar" outcome="welcome" />
+
+			
+		</h:panelGrid>
+
+			</h:form>
+
+	</ui:define>
+</ui:composition>
+
+
+
+</html>

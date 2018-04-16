@@ -19,10 +19,14 @@ import javax.persistence.TemporalType;
 @SequenceGenerator(name="tbClienteId", sequenceName="SQ_TB_CLIENTE_ID",initialValue=1,allocationSize=1)
 @NamedQueries( {
 	@NamedQuery(name=TbCliente.POR_CPF_SENHA, query="Select t From TbCliente t where t.cdsCPF = :cpf and t.txSenha=:senha")
+	,@NamedQuery(name=TbCliente.POR_CPF, query="Select t From TbCliente t where t.cdsCPF = :cpf")
+	,@NamedQuery(name=TbCliente.COUNT_POR_CPF, query="Select count(t) From TbCliente t where t.cdsCPF = :cpf")
 })
 public class TbCliente {
 
 	public static final String POR_CPF_SENHA="br.com.passerapido.entity.TbCliente.POR_CPF_SENHA";
+	public static final String POR_CPF="br.com.passerapido.entity.TbCliente.POR_CPF";
+	public static final String COUNT_POR_CPF="br.com.passerapido.entity.TbCliente.COUNT_POR_CPF";
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="tbClienteId")
@@ -69,6 +73,8 @@ public class TbCliente {
 	@Column(name="cds_rg")
 	private String cdsRG;	//VARCHAR2(15 BYTE)
 	
+	@Column(name="ds_email")
+	private String dsEmail;
 	
 	public Integer getIdCliente() {
 		return idCliente;
@@ -180,6 +186,14 @@ public class TbCliente {
 
 	public void setCdsRG(String cdsRG) {
 		this.cdsRG = cdsRG;
+	}
+
+	public String getDsEmail() {
+		return dsEmail;
+	}
+
+	public void setDsEmail(String dsEmail) {
+		this.dsEmail = dsEmail;
 	}
 	
 //	public void setNome(String nome) {

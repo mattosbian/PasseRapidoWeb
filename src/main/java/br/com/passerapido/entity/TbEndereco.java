@@ -3,11 +3,18 @@ package br.com.passerapido.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries ({
+		@NamedQuery(name=TbEndereco.POR_ID_CLIENTE, query="select e from TbEndereco e where e.idCliente = :idCliente")
+})
 @Table(name="TB_ENDERECO")
 public class TbEndereco {
+
+	public static final String POR_ID_CLIENTE = "br.com.passerapido.entity.TbEndereco.POR_ID_CLIENTE";
 
 	@Id
 	@Column(name="ID_CLIENTE")

@@ -6,135 +6,224 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-  <ui:composition template="/template/common.xhtml">
-   
-     <ui:define name="body">
-        <h5>Meu Cadastro</h5>
-     
-     <p:spacer width="200" height="10"/>
-   
-     <p:fieldset legend="Dados Pessoais" >
-        
-        
-        <p:panelGrid columns="3" styleClass="fundoSaldo" >
-           
-           <p:outputLabel value="CPF" for="itCpf"/>
-           <p:outputLabel value="RG" for="itRg"/>
-           <p:outputLabel/>
-           
-           <p:inputText id="itCpf" required="true"/>
-           <p:inputText id="itRg" required="true"/>
-           <p:outputLabel/>
-           
-           <p:outputLabel value="Primeiro Nome" for="itPrimeiroNome"/>
-           <p:outputLabel value="Sobrenome" for="itSobrenome"/>
-           <p:outputLabel value="Data de Nascimento" for="cDataDeNascimento"/>
-           
-           
-           <p:inputText id="itPrimeiroNome" required="true"/>
-           <p:inputText id="itSobrenome" required="true"/>
-           <p:calendar id="cDataDeNascimento" required="true"/>
-          
-           <p:outputLabel value="Sexo" for="cbSexo"/>
-           <p:outputLabel value="Estado Civil" for="cbEstadoCivil"/>
-           <p:outputLabel value="Nome Completo Mãe" for="itNomeMae"/>
-           
-           
-           <p:selectOneMenu id="cbSexo">
-             <f:selectItem itemLabel="Sexo"/>
-           </p:selectOneMenu>
-           
-           <p:selectOneMenu id="cbEstadoCivil">
-             <f:selectItem itemLabel="Estado Civil"/>
-           </p:selectOneMenu>
-           
-           <p:inputText id="itNomeMae"/>
-          
-          
-           <p:outputLabel value="Email" for="itEmail"/>
-           <p:outputLabel value="Confirmação  de Email" for="itConfirmaEmail"/>
-           <p:outputLabel/>
-           
-           <p:inputText id="itEmail"/>
-           <p:inputText id="itConfirmaEmail"/>
-           <p:outputLabel/>
-           
+<ui:composition template="/template/common.xhtml">
 
-             <p:outputLabel value="DDD" for="itDDDCel"/>
-             <p:outputLabel value="Celular" for="itCelular"/>
-             <p:outputLabel/>
-             
-             <p:inputText id="itDDDCel"/>
-             <p:inputText id="itCelular"/>
-             <p:outputLabel/>
+	<ui:define name="body">
+	
+		<h:form id="formCadastro">
+		<h5>Meu Cadastro</h5>
 
-             
-             <p:outputLabel value="DDD" for="itDDD"/>
-             <p:outputLabel value="Telefone" for="itTelefone"/>
-             <p:outputLabel/>
-           
-             <p:inputText id="itDDD"/>
-             <p:inputText id="itTelefone"/>
-             <p:outputLabel/>         
+		<p:spacer width="200" height="10" />
+
+			<p:fieldset legend="Dados Pessoais">
+
+				<p:panelGrid columns="3" styleClass="fundoSaldo">
+
+					<p:outputLabel value="CPF" for="itCpf" />
+					<p:outputLabel value="RG" for="itRg" />
+					<p:outputLabel />
+
+					<p:inputText id="itCpf"
+						value="#{cadastroMBean.cliente.cdsCPF}" disabled="true" required="true"/>
+					<p:inputText id="itRg" 
+						value="#{cadastroMBean.cliente.cdsRG}" required="true" requiredMessage="RG deve ser preenchido"/>
+					<p:outputLabel />
+
+					<p:outputLabel value="Primeiro Nome" for="itPrimeiroNome" />
+					<p:outputLabel value="Sobrenome" for="itSobrenome" />
+					<p:outputLabel value="Data de Nascimento" for="cDataDeNascimento" />
+
+					<p:inputText id="itPrimeiroNome" 
+						value="#{cadastroMBean.cliente.dsPrimeiroNome}" required="true" requiredMessage="Primeiro Nome deve ser preenchido"/>
+					<p:inputText id="itSobrenome" 
+						value="#{cadastroMBean.cliente.dsSobreNome}" required="true" requiredMessage="Sobrenome deve ser preenchido"/>
+						
+					<p:calendar id="cDataDeNascimento" 
+						value="#{cadastroMBean.cliente.dtNascimento.time}" pattern="dd/MM/yyyy" mask="true" 
+						required="true" requiredMessage="Data de Nascimento deve ser preenchida"/>
 
 
-                            
-        </p:panelGrid>  
-     </p:fieldset>
-     <p:fieldset legend="Dados de Endereco">
-        
-       <p:panelGrid columns="3" styleClass="fundoSaldo"> 
-        
-        <p:outputLabel value="CEP" for="itCep"/>
-        <p:outputLabel value="Estado" for="cbEstado"/>
-        <p:outputLabel value="Cidade" for="itCidade"/>
-        
-        <p:inputText id="itCep"/>
-        <p:selectOneMenu id="cbEstado">
-          <f:selectItem itemLabel="Estado"/>
-        </p:selectOneMenu>
-        <p:inputText value="Cidade" id="itCidade"/>
-        
-        
-        <p:outputLabel value="Endereco" for="itEndereco"/>
-        <p:outputLabel value="Numero" for="itNumero"/>
-        <p:outputLabel value="Complemento" for="itComplemento"/>
-      
-         <p:inputText id="itEndereco"/>
-         <p:inputText id="itNumero"/>
-         <p:inputText id="itComplemento"/>
-      
-      
-         <p:outputLabel value="Bairro" for="itBairro"/>
-         <p:outputLabel/>
-         <p:outputLabel/>
-         <p:inputText id="itBairro"/>
-      
-      </p:panelGrid>          
-     
-     </p:fieldset>
-     
-     
-     <p:fieldset legend="Dados Bancários">
-       <p:panelGrid columns="4" styleClass="fundoSaldo">
-           
-           <p:outputLabel value="Instituição Financeira" for="itInstituicaoFinanceira"/>
-           <p:outputLabel value="Agência" for="itAgencia"/>
-           <p:outputLabel value="Conta Corrente" for="itContaCorrente"/>
-           <p:outputLabel value="Digito" for="itDigito"/>
-           
-           <p:inputText id="itInstituicaoFinanceira"/>
-           <p:inputText id="itAgencia"/>
-           <p:inputText id="itContaCorrente"/>
-           <p:inputText id="itDigito"/>           
-           
-       </p:panelGrid>
-     </p:fieldset>
+					<p:outputLabel value="Sexo" for="cbSexo" />
+					<p:outputLabel value="Estado Civil" for="cbEstadoCivil" />
+					<p:outputLabel value="Nome Completo Mãe" for="itNomeMae" />
 
-	  <p:commandButton value="Salvar" styleClass="btnEntrar"/>
-	                         
-     </ui:define>
-  </ui:composition>
+					<p:selectOneMenu id="cbSexo" value="#{cadastroMBean.cliente.genero}" converter="GeneroToString"
+						required="true" requiredMessage="Sexo deve ser preenchido">
+						
+						<f:selectItem itemLabel="Selecione" itemValue=""/>
+						<f:selectItems value="#{cadastroMBean.cadastro.generos}"
+							var="genero" itemLabel="#{genero.dsGenero}" itemValue="#{genero}" />
+							
+					</p:selectOneMenu>
+
+					<p:selectOneMenu id="cbEstadoCivil" value="#{cadastroMBean.cliente.estadoCivil}" 
+						converter="EstadoCivilToString" required="true" requiredMessage="Estado Civil deve ser preenchido">
+						
+						<f:selectItem itemLabel="Selecione" itemValue=""/>
+						<f:selectItems value="#{cadastroMBean.cadastro.estadosCivis}"
+							var="estCivil" itemLabel="#{estCivil.dsEstadoCivil}"
+							itemValue="#{estadoCivil}" />
+							
+					</p:selectOneMenu>
+
+					<p:inputText id="itNomeMae" value="#{cadastroMBean.cliente.nmCompletoMae}" 
+						required="true" requiredMessage="Nome da Mãe deve ser preenchido"/>
+
+
+
+					<p:outputLabel value="Email" for="itEmail" />
+					<p:outputLabel value="Confirmação  de Email" for="itConfirmaEmail" />
+					<p:outputLabel />
+
+					<p:inputText id="itEmail" value="#{cadastroMBean.cliente.dsEmail1}" />
+					<p:inputText id="itConfirmaEmail" value="#{cadastroMBean.cliente.dsEmail2}"/>
+					<p:outputLabel />
+
+
+					<p:outputLabel value="DDD" for="itDDDCel" />
+					<p:outputLabel value="Celular" for="itCelular" />
+					<p:outputLabel />
+
+					<p:inputText id="itDDDCel" value="#{cadastroMBean.cliente.nrDDDCelular}"
+						required="true" requiredMessage="DDD Celular ser preenchido" />
+					<p:inputText id="itCelular" value="#{cadastroMBean.cliente.nrCelular}" 
+						required="true" requiredMessage="Celular ser preenchido"/>
+					<p:outputLabel />
+
+
+					<p:outputLabel value="DDD" for="itDDD" />
+					<p:outputLabel value="Telefone" for="itTelefone" />
+					<p:outputLabel />
+
+					<p:inputText id="itDDD"
+						value="#{cadastroMBean.cliente.nrDDDTelefone}" />
+					<p:inputText id="itTelefone"
+						value="#{cadastroMBean.cliente.nrTelefone}" />
+					<p:outputLabel />
+
+					<h:outputLabel for="pwd1" value="Senha" />
+			        <h:outputLabel for="pwd2" value="Confirmação de Senha" />
+					<p:outputLabel />
+
+			        <p:inputText id="pwd1" value="#{cadastroMBean.cliente.txSenha1}"
+			        	required="true" requiredMessage="Senha deve ser preenchida"/>
+			        <p:inputText id="pwd2" value="#{cadastroMBean.cliente.txSenha2}"
+			        	required="true" requiredMessage="Confirmação de Senha deve ser preenchida"/>
+					<p:outputLabel />
+
+				</p:panelGrid>
+			</p:fieldset>
+			
+			<p:fieldset legend="Dados de Endereco">
+
+				<p:panelGrid columns="3" styleClass="fundoSaldo">
+
+					<p:outputLabel value="CEP" for="itCep" />
+					<p:outputLabel value="Estado" for="cbEstado" />
+					<p:outputLabel value="Cidade" for="itCidade" />
+
+					<p:inputText id="itCep" value="#{cadastroMBean.endereco.nrCep}" 
+						required="true" requiredMessage="CEP deve ser preenchido" />
+
+					<p:selectOneMenu id="cbEstado" value="#{cadastroMBean.endereco.sgEstado}"
+						required="true" requiredMessage="Estado deve ser preenchido">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{cadastroMBean.cadastro.estados}" />
+					</p:selectOneMenu>
+
+					<p:inputText id="itCidade"
+						value="#{cadastroMBean.endereco.nmCidade}" />
+
+					<p:outputLabel value="Endereco" for="itEndereco" />
+					<p:outputLabel value="Numero" for="itNumero" />
+					<p:outputLabel value="Complemento" for="itComplemento" />
+
+					<p:inputText id="itEndereco"
+						value="#{cadastroMBean.endereco.dsEndereco}" />
+					<p:inputText id="itNumero"
+						value="#{cadastroMBean.endereco.nrEndereco}" />
+					<p:inputText id="itComplemento"
+						value="#{cadastroMBean.endereco.dsComplemento}" />
+
+					<p:outputLabel value="Bairro" for="itBairro" />
+					<p:outputLabel />
+					<p:outputLabel />
+					<p:inputText id="itBairro"
+						value="#{cadastroMBean.endereco.nmBairro}" />
+
+				</p:panelGrid>
+
+			</p:fieldset>
+
+
+			<p:fieldset legend="Dados Bancários">
+				<p:panelGrid columns="4" styleClass="fundoSaldo">
+
+					<p:outputLabel value="Instituição Financeira"
+						for="itInstituicaoFinanceira" />
+					<p:outputLabel value="Agência" for="itAgencia" />
+					<p:outputLabel value="Conta Corrente" for="itContaCorrente" />
+					<p:outputLabel value="Digito" for="itDigito" />
+
+					<p:inputText id="itInstituicaoFinanceira"
+						value="#{cadastroMBean.conta.nmBanco}" />
+					<p:inputText id="itAgencia"
+						value="#{cadastroMBean.conta.nrAgencia}" />
+					<p:inputText id="itContaCorrente"
+						value="#{cadastroMBean.conta.nrConta}" />
+					<p:inputText id="itDigito" value="#{cadastroMBean.conta.nrDigito}" />
+
+				</p:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset legend="Veículos" >
+
+					<p:panelGrid columns="4" styleClass="fundoSaldo" id="painelVeiculo">
+						<p:outputLabel value="Tag" for="itTag" />
+						<p:outputLabel value="Marca" for="itMarca" />
+						<p:outputLabel value="Modelo" for="itModelo" />
+						<p:outputLabel value="Placa" for="itPlaca" />
+	
+						<p:inputText id="itTag"	disabled="true" value="#{cadastroMBean.tag.cdTag}"/>
+						<p:inputText id="itMarca"	value="#{cadastroMBean.tag.veiculo.nmMarca}" />
+						<p:inputText id="itModelo"	value="#{cadastroMBean.tag.veiculo.nmModelo}" />
+						<p:inputText id="itPlaca"	value="#{cadastroMBean.tag.veiculo.nrPlaca}" />
+					</p:panelGrid>
+	
+
+					<p:commandButton value="Salvar" action="#{cadastroMBean.salvaTag}" 
+						process="@this painelVeiculo" update="painelVeiculo tabelaVeiculos"/>
+
+					<p:commandButton value="Limpa" action="#{cadastroMBean.limpaTag}" 
+						process="@this painelVeiculo" update="painelVeiculo"/> 
+
+
+					
+					<p:dataList id="tabelaVeiculos" value="#{cadastroMBean.tags}" var="tag" 
+						type="unordered" >
+				        <f:facet name="header">
+				            Lista
+				        </f:facet>
+				        
+				        <p:commandLink update=":formCadastro:painelVeiculo tabelaVeiculos" title="Ver Detalhe" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px"
+				        	action="#{cadastroMBean.selecionaTag(tag)}"/>
+				        
+			            <h:outputText value="#{tag.veiculo.nmModelo}, #{tag.veiculo.nrPlaca}" style="display:inline-block"/>
+				    </p:dataList>
+
+
+			</p:fieldset>
+
+
+			<p:commandButton value="Salva" styleClass="btnEntrar" 
+				action="#{cadastroMBean.salvar}" update="formCadastro" />
+
+			<p:commandButton value="Sair" styleClass="btnEntrar" 
+				action="#{cadastroMBean.sair}"  immediate="true" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 
 
 

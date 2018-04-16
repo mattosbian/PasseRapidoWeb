@@ -1,27 +1,78 @@
 package br.com.passerapido.dominio;
 
-import br.com.passerapido.entity.TbGenero;
+import java.io.Serializable;
 
-public class Genero {
-	private Integer codigo;
-	private String nome;
+import javax.persistence.EntityManager;
+
+import br.com.passerapido.entity.TbGenero;
+import br.com.passerapido.util.EntityManagerUtil;
+
+public class Genero implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Integer cdGenero;
+	private String dsGenero;
+
+	public static Genero buscaPorId(Integer id) {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		TbGenero tbGenero = em.find(TbGenero.class, id);
+		return new Genero(tbGenero);
+	}
 	
 	public Genero(TbGenero tbGenero) {
-		this.codigo = tbGenero.getCdGenero();
-		this.nome = tbGenero.getDsGenero();
+		this.cdGenero = tbGenero.getCdGenero();
+		this.dsGenero = tbGenero.getDsGenero();
 	}
-	
+
+	public Genero() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getCdGenero() {
-		return codigo;
+		return cdGenero;
 	}
 	public void setCdGenero(Integer cdGenero) {
-		this.codigo = cdGenero;
+		this.cdGenero = cdGenero;
 	}
 	public String getDsGenero() {
-		return nome;
+		return dsGenero;
 	}
 	public void setDsGenero(String dsGenero) {
-		this.nome = dsGenero;
+		this.dsGenero = dsGenero;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cdGenero == null) ? 0 : cdGenero.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Genero other = (Genero) obj;
+		if (cdGenero == null) {
+			if (other.cdGenero != null)
+				return false;
+		} else if (!cdGenero.equals(other.cdGenero))
+			return false;
+		return true;
+	}
+
+	public boolean isPreenchido() {
+		return this.cdGenero != null;
+	}
+
+
 
 }

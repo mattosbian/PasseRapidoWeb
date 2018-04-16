@@ -19,11 +19,13 @@
 				<p:inputText id="itCpf" required="true" value="#{loginMBean.login.cpf}" requiredMessage="Cpf deve ser informado" />
 
 				<p:outputLabel value="Senha" for="itSenha" />
-				<p:inputText id="itSenha" required="true"
-					value="#{loginMBean.login.senha}"  requiredMessage="Senha deve ser informada"/>
+				<p:inputText id="itSenha" value="#{loginMBean.login.senha}" />
 
-				<p:commandButton value="Salvar" styleClass="btnEntrar"
+				<p:commandButton value="Login" styleClass="btnEntrar"
 					action="#{loginMBean.realizarLogin}" />
+
+				<p:commandButton value="Novo" styleClass="btnEntrar"
+					action="#{loginMBean.novoUsuario}" />
 
 			</p:panelGrid>
 		</h:form>

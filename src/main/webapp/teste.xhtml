@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/common.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:spacer width="200" height="10" />
+
+
+			<p:panelGrid columns="2" styleClass="fundoSaldo">
+
+				<p:outputLabel value="campo1" for="itCampo1" />
+				<p:inputText id="itCampo1" value="#{testeMBean.campo1}"
+					requiredMessage="Campo1 deve ser informado" />
+
+				<p:commandButton value="Salvar" styleClass="btnEntrar"
+					action="#{testeMBean.salva}" />
+
+			</p:panelGrid>
+		</h:form>
+
+		<h:form>
+			<p:selectOneMenu value="#{testeMBean.combo1}" id="combo1">
+				<f:selectItem itemLabel="valor1" itemValue="valor1" />
+				<f:selectItem itemLabel="valor2" itemValue="valor2" />
+				<f:selectItem itemLabel="valor3" itemValue="valor3" />
+				<p:ajax event="change" update="itCampo2" process="combo1" />
+			</p:selectOneMenu>
+
+			<p:inputText id="itCampo2" value="#{testeMBean.combo1}" />
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+
+
+</html>

@@ -9,8 +9,12 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import br.com.passerapido.entity.TbCliente;
+import br.com.passerapido.entity.TbContaBancaria;
+import br.com.passerapido.entity.TbEndereco;
+import br.com.passerapido.entity.TbEstado;
 import br.com.passerapido.entity.TbEstadoCivil;
 import br.com.passerapido.entity.TbGenero;
+import br.com.passerapido.entity.TbTag;
 import br.com.passerapido.exception.CadastroException;
 import br.com.passerapido.exception.DominioException;
 import br.com.passerapido.util.EntityManagerUtil;
@@ -19,24 +23,75 @@ public class Cadastro {
 	
 	private Cliente cliente;
 	private ContaBancaria conta;
+	private Endereco endereco;
+
+	//deve ser dominio e nao entidade
+	//private Genero genero;
+	//private EstadoCivil estadoCivil;
+	
 	
 	// deve ser lista de dominio e nao entidade
 	private List<Genero> generos;
 	private List<EstadoCivil> estadosCivis;
+	private List<String> estados;
+	private List<Tag> tags;
 	
-	//deve ser dominio e nao entidade
-	private Genero genero;
-	private EstadoCivil estadoCivil;
-	
-	public Cadastro() {
+
+	private void inicio() {
 		cliente = new Cliente(); // ja estava
+		cliente.setGenero(new Genero());
+		cliente.setEstadoCivil(new EstadoCivil());
+		conta = new ContaBancaria();
+		endereco = new Endereco();
+		tags = new ArrayList<Tag>();
 		
+		carregaCombos();
+	}
+	
+	private void carregaCombos() {
 		this.generos = listaGenero();
 		this.estadosCivis = listaEstadoCivil();
+		this.estados = listaEstado();
+	}
+
+	public Cadastro(Login login) {
+		
+		if (login == null) {
+			inicio();
+		} else if (login.isNovo()) {
+			inicio();
+			this.cliente.setCdsCPF(login.getCpf());
+		} else {
+			carregaDados(login.getCpf());
+		}
+		
+	}
+
+	private void carregaDados(String cpf) {
+		cliente = Cliente.buscaPorCPF(cpf);
+		//this.genero = cliente.getGenero();
+		//this.estadoCivil = cliente.getEstadoCivil();
+		
+		this.tags = Tag.buscaPorIdCliente(cliente.getId());
+
+		System.out.println("Cadastro carregaDados idCliente:" + cliente.getId());
+		
+		endereco = Endereco.buscaPorIdCliente(cliente.getId());
+		conta = ContaBancaria.buscaPorIdCliente(cliente.getId());
+
+		carregaCombos();
 	}
 	
 	public Cliente getCliente() {
 		return cliente;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public ContaBancaria getConta() {
+		return conta;
 	}
 	
 	public List<Genero> getGeneros() {
@@ -46,6 +101,27 @@ public class Cadastro {
 	public List<EstadoCivil> getEstadosCivis() {
 		return estadosCivis;
 	}
+
+	public List<String> getEstados() {
+		return estados;
+	}
+
+//	public Genero getGenero() {
+//		return genero;
+//	}
+
+//	public void setGenero(Genero genero) {
+//		this.genero = genero;
+//	}
+
+//	public EstadoCivil getEstadoCivil() {
+//		return estadoCivil;
+//	}
+
+//	public void setEstadoCivil(EstadoCivil estadoCivil) {
+//		this.estadoCivil = estadoCivil;
+//	}
+
 	
 	public void novoCadastro() throws CadastroException {	
 		
@@ -53,15 +129,38 @@ public class Cadastro {
 		
 		try {
 			cliente.validate();
+			conta.validate();
+			endereco.validate();
+			
+			List<TbTag> tbTags = new ArrayList<TbTag>();
+
+			for (Tag t : tags) {
+				t.validate();
+				tbTags.add(t.toEntity());
+			}
 
 			TbCliente tbCliente = cliente.toEntity();
-			//TbEndereco tbEndereco = cliente.getEndereco().toEntity();
+			TbEndereco tbEndereco = endereco.toEntity();
+			TbContaBancaria tbContaBancaria = conta.toEntity();
+
+			
 			
 			em.getTransaction().begin();
 			
 			em.persist(tbCliente);
-			//em.persist(tbEndereco);
 			
+			tbEndereco.setIdCliente(tbCliente.getIdCliente());
+			em.persist(tbEndereco);
+			
+			tbContaBancaria.setIdCliente(tbCliente.getIdCliente());
+			em.persist(tbContaBancaria);
+
+			for (TbTag tb : tbTags) {
+				tb.setIdCliente(tbCliente.getIdCliente());
+				
+				em.persist(tb);
+			}
+
 			em.getTransaction().commit();
 		
 		} catch (DominioException e) {
@@ -78,8 +177,64 @@ public class Cadastro {
 	}
 
 
-	public void salvar() {
-		// TODO Auto-generated method stub
+	public void salvar() throws CadastroException {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		
+		try {
+			System.out.println("Cadastro - antes validate");
+			cliente.validate();
+			conta.validate();
+			endereco.validate();
+
+			System.out.println("Cadastro - tag validate");
+			for (Tag t : tags) {
+				t.validate();
+			}
+
+			System.out.println("Cadastro - to entity");
+
+			TbCliente tbCliente = cliente.toEntity();
+			TbEndereco tbEndereco = endereco.toEntity();
+			TbContaBancaria tbContaBancaria = conta.toEntity();
+
+			System.out.println("Cadastro - begin");
+			
+			em.getTransaction().begin();
+			
+			tbCliente = em.merge(tbCliente);
+
+			if (endereco.isNovo()) {
+				tbEndereco.setIdCliente(tbCliente.getIdCliente());
+				em.persist(tbEndereco);
+			}else {
+				tbEndereco = em.merge(tbEndereco);
+			}
+			
+
+			if (conta.isNovo()) {
+				tbContaBancaria.setIdCliente(tbCliente.getIdCliente());
+				em.persist(tbContaBancaria);
+			} else {
+				tbContaBancaria = em.merge(tbContaBancaria);
+			}
+			
+
+			for (Tag t : tags) {
+				if (t.isNovo()) {
+					t.setIdCliente(cliente.getId());
+					em.persist(t.toEntity());
+				} else {
+					em.merge(t.toEntity());
+				}
+			}
+
+			em.getTransaction().commit();
+		
+		} catch (DominioException e) {
+			throw new CadastroException(e.getMessage(),e);
+		} catch (PersistenceException e) {
+           em.getTransaction().rollback();             
+		}	
 		
 	}
 
@@ -123,21 +278,35 @@ public class Cadastro {
 		return listaEstadosCivis;
 	}
 
-	public Genero getGenero() {
-		return genero;
+	private List<String> listaEstado() {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+
+		List<TbEstado> tbLista;
+		
+		try {
+			Query query  = em.createNamedQuery(TbEstado.TODOS, TbEstado.class);
+			tbLista = query.getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+		
+		List<String> listaEstados = new ArrayList<String>();
+		for (TbEstado tbEstado : tbLista) {
+			//listaEstados.add(new Estado(tbEstado));
+			listaEstados.add(tbEstado.getSgEstado());
+		}
+		
+		return listaEstados;
 	}
 
-	public void setGenero(Genero genero) {
-		this.genero = genero;
+	public List<Tag> getTags() {
+		return tags;
 	}
 
-	public EstadoCivil getEstadoCivil() {
-		return estadoCivil;
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
-	public void setEstadoCivil(EstadoCivil estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
 
 
 }

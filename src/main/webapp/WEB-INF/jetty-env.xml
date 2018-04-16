@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+ <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+	<New id="Oracle" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg></Arg>
+		<Arg>jdbc/Oracle</Arg>
+		<Arg>
+			<New class="oracle.jdbc.pool.OracleDataSource">
+				<Set name="DriverType">thin</Set>
+				<Set name="URL">jdbc:oracle:thin:@192.168.0.30:1521:orcl</Set>
+				<Set name="User">usrpasrapido</Set>
+				<Set name="Password">usrpasrapido</Set>
+				<Set name="connectionCachingEnabled">true</Set>
+				<Set name="connectionCacheProperties">
+					<New class="java.util.Properties">
+						<Call name="setProperty">
+							<Arg>MinLimit</Arg>
+							<Arg>5</Arg>
+						</Call>
+						<!-- put the other properties in here too -->
+					</New>
+				</Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>

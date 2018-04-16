@@ -6,41 +6,50 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-  <ui:composition template="/template/common.xhtml">
-   
-     <ui:define name="body">
-        <h5>Bem vindo - Passe Rápido</h5>
-     
-     <p:spacer width="200" height="100"/>
-        
-        <p:panelGrid columns="4" >      
-        
-           <h:graphicImage library="imagens" name="bgCadastro.png"/>
-           <p:outputLabel value="Mantenha seu cadastro sempre atualizado"/>
-           <p:button value="Atualizar" styleClass="btnEntrar"/>
-        
-        
-                     
-	        <p:panelGrid columns="2" styleClass="fundoSaldo">
-	        
-	           <p:outputLabel value="Placa"/>
-	           <p:selectOneMenu>
-	              <f:selectItem itemLabel="Placa do Veículo"/>
-	           </p:selectOneMenu> 
-	           
-	            <p:outputLabel value="Tag"/>
-	             <p:outputLabel value="Numero"/>
-	        
-	           <p:graphicImage library="imagens" name="bgCancelaAberta2.png"/>
-	           <p:outputLabel value="Seu Saldo"/>
-	           <p:outputLabel/>
-	           <p:button value="Extrato" styleClass="btnEntrar"/>
-	           
-	        </p:panelGrid>
-        </p:panelGrid>  
-                       
-     </ui:define>
-  </ui:composition>
+<ui:composition template="/template/common.xhtml">
+
+	<ui:define name="body">
+		<h5>Bem vindo - Passe Rápido</h5>
+
+		<p:spacer width="200" height="100" />
+
+		<p:panelGrid columns="4">
+
+			<h:graphicImage library="imagens" name="bgCadastro.png" />
+			<p:outputLabel value="Mantenha seu cadastro sempre atualizado" />
+			<p:button value="Atualizar" styleClass="btnEntrar" outcome="cadastro" />
+
+			<h:form>
+				<p:panelGrid columns="2" styleClass="fundoSaldo" id="painelSaldo">
+
+					<p:outputLabel value="Placa" />
+					<p:selectOneMenu id="cbPlaca" value="#{welcomeMBean.tag}" converter="TagToString">
+						<f:selectItem itemLabel="Selecione Placa" itemValue="" />
+						<f:selectItems value="#{welcomeMBean.tags}" var="tag"
+							itemLabel="#{tag.veiculo.nrPlaca}" itemValue="#{tag}" />
+						<p:ajax event="change" process="@this" update="olTag olSaldo"/>
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Tag" for="olTag"/>
+					<p:outputLabel value="#{welcomeMBean.tag.cdTag}" id="olTag"/>
+
+					<p:graphicImage library="imagens" name="bgCancelaAberta2.png" />
+					<p:outputLabel value="R$ #{welcomeMBean.tag.vlSaldo}" id="olSaldo"/>
+					<p:outputLabel />
+					<p:button value="Extrato" styleClass="btnEntrar" outcome="extrato" />
+
+				</p:panelGrid>
+			</h:form>
+
+			<h:form>
+				<p:commandButton value="Sair" styleClass="btnEntrar"
+					action="#{welcomeMBean.logoff}" process="@this" />
+			</h:form>
+
+		</p:panelGrid>
+
+	</ui:define>
+</ui:composition>
 
 
 

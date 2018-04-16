@@ -4,6 +4,9 @@
 	   <non-jta-data-source>java:/comp/env/jdbc/Oracle</non-jta-data-source>
 	   
 	   <class>br.com.passerapido.entity.TbCliente</class>
+	   <properties>
+		   <property name = "hibernate.show_sql" value = "true" />
+	   </properties>
 	</persistence-unit>
 
 
