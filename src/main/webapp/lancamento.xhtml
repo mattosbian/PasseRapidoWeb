@@ -10,7 +10,7 @@
 
 	<ui:define name="body">
 
-		<h5>Recarga</h5>
+		<h5>Lançamento</h5>
 
 		<h:form>
 
@@ -18,9 +18,9 @@
 
 
 			<p:outputLabel value="Veículo" styleClass="outputLabel" />
-			<p:outputLabel value="Tag" styleClass="outputLabel" for="itTag"/>
-			<p:outputLabel value="Saldo Atual" styleClass="outputLabel" for="itSaldoAtual" />
-
+            <p:outputLabel value="Tag" styleClass="outputLabel"/>
+            <p:outputLabel value="Saldo Atual" styleClass="outputLabel"/>
+			
 			<p:selectOneMenu id="cbPlaca" value="#{lancamentoMBean.tag}"
 				converter="TagToString">
 				<f:selectItem itemLabel="Selecione Placa" itemValue="" />
@@ -29,24 +29,30 @@
 				<p:ajax event="change" update="itTag itSaldoAtual" process="cbPlaca" />
 			</p:selectOneMenu>
 
-			<p:inputText value="#{lancamentoMBean.tag.cdTag}" id="itTag" disabled="true" />
-			<p:inputText value="#{lancamentoMBean.tag.vlSaldo}" id="itSaldoAtual" disabled="true" />
+            <p:outputLabel value="#{lancamentoMBean.tag.cdTag}" id="itTag" styleClass="outputSaldo"/>
+
+            <p:outputLabel value="#{lancamentoMBean.tag.vlSaldo}" id="itSaldoAtual" styleClass="outputSaldo"/>
 
 
-
-			<p:outputLabel value="Valor" styleClass="outputLabel" for="itValor" />
-			<p:outputLabel />
-			<p:outputLabel />
-
-			<p:inputText id="itValor" value="#{lancamentoMBean.valorRecarga}" />
-			<p:outputLabel />
-			<p:outputLabel />
-
-			<p:commandButton value="Recarregar" styleClass="btnEntrar" action="#{lancamentoMBean.recarregar}" update="@form"/>
-
-			<p:button value="Sair" styleClass="btnEntrar" outcome="welcome" />
 
 			
+			<p:outputLabel value="Tipo Transação" styleClass="outputLabel" for="cbTipo"/>
+			<p:outputLabel value="Valor" styleClass="outputLabel" for="itValor" />
+			<p:outputLabel />
+
+			<p:selectOneMenu id="cbTipo" value="#{lancamentoMBean.transacao.tipoTransacao}"
+					converter="TipoTransacaoToString">
+				<f:selectItem itemLabel="Selecione" itemValue=""/>
+				<f:selectItems value="#{lancamentoMBean.tipos}" var="tipo"
+					itemLabel="#{tipo.nmTipoTransacao}" itemValue="#{tipo}"/>
+			</p:selectOneMenu>
+
+			<p:inputText id="itValor" value="#{lancamentoMBean.transacao.vlTransacao}" />
+			<p:outputLabel />
+
+
+			<p:commandButton value="OK" styleClass="btnEntrar" action="#{lancamentoMBean.salvar}" update="@form" ajax="false"/>
+
 		</h:panelGrid>
 
 			</h:form>

@@ -23,21 +23,17 @@ public class WelcomeMBean implements Serializable{
 	private Tag tag;
 	
 	public WelcomeMBean() {
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//Login login = (Login) context.getExternalContext().getSessionMap().get("cpfLogado");
 		Login login = Login.getUsuarioLogado();
 		
 		Cliente cliente = Cliente.buscaPorCPF(login.getCpf());
 		
-		this.setTags(Tag.buscaPorIdCliente(cliente.getId()));
+		this.setTags(Tag.buscaPorIdClienteAtivas(cliente.getId()));
 		
 		tag = new Tag();
 	}
 
 	
 	public String logoff() {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		context.getExternalContext().getSessionMap().remove("cpfLogado");
 		Login.removeUsuarioLogado();
 		
 		return "login?faces-redirect=true";

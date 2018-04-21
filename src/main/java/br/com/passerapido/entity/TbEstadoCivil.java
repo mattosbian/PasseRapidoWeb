@@ -22,10 +22,10 @@ public class TbEstadoCivil implements Serializable{
 	
 	@Id
 	@Column(name="cd_estado_civil")
-	private Integer cdEstadoCivil; //NUMBER(1,0)
+	private Integer cdEstadoCivil; 
 	
 	@Column(name="ds_estado_civil")
-	private String dsEstadoCivil; //VARCHAR2(30 BYTE)
+	private String dsEstadoCivil; 
 
 	public Integer getCdEstadoCivil() {
 		return cdEstadoCivil;

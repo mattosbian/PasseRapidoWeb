@@ -1,14 +1,39 @@
 package br.com.passerapido.dominio;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import br.com.passerapido.exception.DominioException;
+import org.junit.Test;
 
 public class ContaBancariaTest {
 
-	@Test(expected=DominioException.class)
-	public void IdClienteDveSerPreenchido() throws DominioException {
+	@Test
+	public void isAlgumCampoPreenchido() {
 		ContaBancaria conta = new ContaBancaria();
-		conta.validate();
+		assertEquals(conta.isAlgumCampoPreenchido(), false);
+
+		conta.setNmBanco("Banco");
+		assertEquals(conta.isAlgumCampoPreenchido(), true);
+
+		conta.setNmBanco("");
+		assertEquals(conta.isAlgumCampoPreenchido(), false);
+
+		conta.setNrAgencia("Agencia");
+		assertEquals(conta.isAlgumCampoPreenchido(), true);
+
+		conta.setNrAgencia("");
+		assertEquals(conta.isAlgumCampoPreenchido(), false);
+		
+		conta.setNrConta("Conta");
+		assertEquals(conta.isAlgumCampoPreenchido(), true);
+
+		conta.setNrConta("");
+		assertEquals(conta.isAlgumCampoPreenchido(), false);
+		
+		conta.setNrDigito(0);
+		assertEquals(conta.isAlgumCampoPreenchido(), true);
+
+		conta.setNrDigito(null);
+		assertEquals(conta.isAlgumCampoPreenchido(), false);
+		
 	}
 }

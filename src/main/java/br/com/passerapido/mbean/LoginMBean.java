@@ -37,7 +37,6 @@ public class LoginMBean implements Serializable{
 		try {
 			login.entrarNoSistema();
 			
-			//putSession();
 			login.setUsuarioLogado();
 			
 			return "welcome?faces-redirect=true";
@@ -57,33 +56,18 @@ public class LoginMBean implements Serializable{
 	        
 		} else {
 			login.novo();
-			//putSession();
 			login.setUsuarioLogado();
 			return "cadastro?faces-redirect=true";
 		}
 			
 	}
 
-
-//	private void putSession() {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		context.getExternalContext().getSessionMap().put("cpfLogado", this.login);
-//	}
-	
 	public Login getLogin() {
 		return login;
 	}
-
-
-
 
 	public void setLogin(Login login) {
 		this.login = login;
 	}
 
-
-
-	
-	
-	
 }

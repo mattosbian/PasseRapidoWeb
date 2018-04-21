@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 
 import br.com.passerapido.dominio.Cadastro;
 import br.com.passerapido.dominio.Cliente;
@@ -34,13 +34,10 @@ public class CadastroMBean implements Serializable{
 	private Tag tag;
 	private Tag tagSelecionada;
 
-	
+	private Login login;
 	
 	public CadastroMBean() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Login login = (Login) context.getExternalContext().getSessionMap().get("cpfLogado");
-		
-		System.out.println("construct CadastroMBean cpf:" + login.getCpf());
+		login = Login.getUsuarioLogado();
 		
 		cadastro = new Cadastro(login);
 		this.cliente = cadastro.getCliente();
@@ -72,28 +69,56 @@ public class CadastroMBean implements Serializable{
 	}
 	
 	public String sair() {
-		if (cadastro.isNovo()) {
+		//if (cadastro.isNovo()) {
+		if (this.login.isNovo()) {
 			Login.removeUsuarioLogado();
 			return "login?faces-redirect=true";
 		}
 		return "welcome?faces-redirect=true";
 	}
 
+	
+	
 	public void salvar() {
 		try {
 			if (cadastro.isNovo()) {
-				System.out.println("Novo Cadastro");
 				cadastro.novoCadastro();
 			}else {
-				System.out.println("Atualiza Cadastro");
 				cadastro.salvar();
 			}
 			JsfUtil.addMensagem("Cadastro realizado com sucesso");
 		} catch (CadastroException e) {
 			JsfUtil.addMensagemDeErro(e.getMessage());
+		} catch (PersistenceException e) {
+			JsfUtil.addMensagemDeErro(e.getMessage());
 		}
 	}
 
+	
+	
+	public void salvaTag() {
+		if (this.tagSelecionada == null) {
+			this.tags.add(this.tag);
+		} else {
+			this.tagSelecionada.setAll(tag);
+		}
+		
+		limpaTag();
+	}
+
+	public void selecionaTag(Tag tag) {
+		this.tagSelecionada = tag;
+		this.tag = new Tag(tag);
+	}
+	
+	public void limpaTag() {
+		this.tagSelecionada = null;
+		this.tag = new Tag();
+	}
+
+
+	
+	
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -117,28 +142,6 @@ public class CadastroMBean implements Serializable{
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
-
-	public void salvaTag() {
-		if (this.tagSelecionada == null) {
-			this.tags.add(this.tag);
-		} else {
-			this.tagSelecionada.setAll(tag);
-		}
-		
-		limpaTag();
-	}
-
-	public void selecionaTag(Tag tag) {
-		this.tagSelecionada = tag;
-		this.tag = new Tag(tag);
-	}
-	
-	
-	public void limpaTag() {
-		this.tagSelecionada = null;
-		this.tag = new Tag();
-	}
-
 
 	
 }

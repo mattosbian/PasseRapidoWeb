@@ -18,19 +18,19 @@ public class TbContaBancaria {
 
 	@Id
 	@Column(name="ID_CLIENTE")
-	private Integer idCliente;	//NUMBER
+	private Integer idCliente;	
 
 	@Column(name="NM_BANCO")
-	private String nmBanco;	//VARCHAR2(50 BYTE)
+	private String nmBanco;	
 
 	@Column(name="NR_AGENCIA")
-	private String nrAgencia;	//VARCHAR2(10 BYTE)
+	private String nrAgencia;	
 
 	@Column(name="NR_CONTA")
-	private String nrConta;	//VARCHAR2(20 BYTE)
+	private String nrConta;	
 
 	@Column(name="NR_DIGITO")
-	private Integer nrDigito;	//NUMBER(2,0)
+	private Integer nrDigito;	
 
 	public Integer getIdCliente() {
 		return idCliente;

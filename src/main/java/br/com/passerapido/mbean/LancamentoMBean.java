@@ -1,67 +1,66 @@
 package br.com.passerapido.mbean;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import br.com.passerapido.dominio.Lancamento;
 import br.com.passerapido.dominio.Login;
 import br.com.passerapido.dominio.Tag;
+import br.com.passerapido.dominio.TipoTransacao;
+import br.com.passerapido.dominio.Transacao;
 import br.com.passerapido.exception.DominioException;
 import br.com.passerapido.util.JsfUtil;
 
 @ManagedBean
 @ViewScoped
-public class LancamentoMBean implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class LancamentoMBean {
 
 
 	Lancamento lancamento;
 	
 	private List<Tag> tags;
+	private List<TipoTransacao> tipos;
 	
 	private Tag tag;
-	
-	private Integer valorRecarga; 
+	private Transacao transacao;
 	
 	public LancamentoMBean() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Login login = (Login) context.getExternalContext().getSessionMap().get("cpfLogado");
 		
-		//para teste
-//		Login login = new Login();
-//		login.setCpf("111");
-		//para teste
-
+		Login login = Login.getUsuarioLogado();
+		
 		lancamento = new Lancamento(login);
 		tags = lancamento.getTags();
-		
-		this.valorRecarga = 0;
+		setTipos(lancamento.getTipos());
+
+		tag = new Tag();
+		transacao = new Transacao();
+
 	}
 
-	public void recarregar()  {
-		System.out.println("lancamentoMBean valor:" + this.valorRecarga);
+	private void reinicio() {
+		this.transacao.setVlTransacao(0);
+		this.transacao.setTipoTransacao(null);
+	}
+	
+	public void salvar()  {
 
-		lancamento.setTag(this.tag);
-		
+		transacao.setTag(this.tag);
+		lancamento.setTransacao(transacao);
+
 		try {
-			this.lancamento.recarregar(this.valorRecarga);
-			JsfUtil.addMensagem("Recarga realizada com sucesso");
-			
-			this.tag = new Tag();
-			this.valorRecarga = 0;
-			
+			lancamento.salvar();
+			JsfUtil.addMensagem("Lançamento realizado com sucesso");
+			reinicio();
+
 		} catch (DominioException e) {
 			JsfUtil.addMensagemDeErro(e.getMessage());
+			return;
 		}
+		
 	}
+
 	
 	public List<Tag> getTags() {
 		return tags;
@@ -72,23 +71,27 @@ public class LancamentoMBean implements Serializable{
 	}
 
 	public Tag getTag() {
-		System.out.println("LancamentoMbean - getTag");
 		return tag;
 	}
 
 	public void setTag(Tag tag) {
 		this.tag = tag;
-		System.out.println("LancamentoMbean - setTag : " + tag.getCdTag());
 	}
 
-
-	public Integer getValorRecarga() {
-		return valorRecarga;
+	public List<TipoTransacao> getTipos() {
+		return tipos;
 	}
 
+	public void setTipos(List<TipoTransacao> tipos) {
+		this.tipos = tipos;
+	}
 
-	public void setValorRecarga(Integer valorRecarga) {
-		this.valorRecarga = valorRecarga;
+	public Transacao getTransacao() {
+		return transacao;
+	}
+
+	public void setTransacao(Transacao transacao) {
+		this.transacao = transacao;
 	}
 
 	

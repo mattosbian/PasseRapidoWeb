@@ -22,10 +22,10 @@ public class TbGenero implements Serializable{
 	
 	@Id
 	@Column(name="cd_genero")
-	private Integer cdGenero; //NUMBER(1,0)
+	private Integer cdGenero;
 	
 	@Column(name="ds_genero")
-	private String dsGenero; //VARCHAR2(30 BYTE)
+	private String dsGenero;
 
 	public Integer getCdGenero() {
 		return cdGenero;

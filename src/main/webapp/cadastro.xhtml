@@ -25,7 +25,7 @@
 
 					<p:inputText id="itCpf"
 						value="#{cadastroMBean.cliente.cdsCPF}" disabled="true" required="true"/>
-					<p:inputText id="itRg" 
+					<p:inputText id="itRg" maxlength="15"
 						value="#{cadastroMBean.cliente.cdsRG}" required="true" requiredMessage="RG deve ser preenchido"/>
 					<p:outputLabel />
 
@@ -33,9 +33,9 @@
 					<p:outputLabel value="Sobrenome" for="itSobrenome" />
 					<p:outputLabel value="Data de Nascimento" for="cDataDeNascimento" />
 
-					<p:inputText id="itPrimeiroNome" 
+					<p:inputText id="itPrimeiroNome" maxlength="30"
 						value="#{cadastroMBean.cliente.dsPrimeiroNome}" required="true" requiredMessage="Primeiro Nome deve ser preenchido"/>
-					<p:inputText id="itSobrenome" 
+					<p:inputText id="itSobrenome" maxlength="100"
 						value="#{cadastroMBean.cliente.dsSobreNome}" required="true" requiredMessage="Sobrenome deve ser preenchido"/>
 						
 					<p:calendar id="cDataDeNascimento" 
@@ -66,7 +66,7 @@
 							
 					</p:selectOneMenu>
 
-					<p:inputText id="itNomeMae" value="#{cadastroMBean.cliente.nmCompletoMae}" 
+					<p:inputText id="itNomeMae" value="#{cadastroMBean.cliente.nmCompletoMae}" maxlength="100" 
 						required="true" requiredMessage="Nome da Mãe deve ser preenchido"/>
 
 
@@ -75,8 +75,8 @@
 					<p:outputLabel value="Confirmação  de Email" for="itConfirmaEmail" />
 					<p:outputLabel />
 
-					<p:inputText id="itEmail" value="#{cadastroMBean.cliente.dsEmail1}" />
-					<p:inputText id="itConfirmaEmail" value="#{cadastroMBean.cliente.dsEmail2}"/>
+					<p:inputText id="itEmail" value="#{cadastroMBean.cliente.dsEmail1}" maxlength="40"/>
+					<p:inputText id="itConfirmaEmail" value="#{cadastroMBean.cliente.dsEmail2}" maxlength="40"/>
 					<p:outputLabel />
 
 
@@ -84,10 +84,10 @@
 					<p:outputLabel value="Celular" for="itCelular" />
 					<p:outputLabel />
 
-					<p:inputText id="itDDDCel" value="#{cadastroMBean.cliente.nrDDDCelular}"
-						required="true" requiredMessage="DDD Celular ser preenchido" />
-					<p:inputText id="itCelular" value="#{cadastroMBean.cliente.nrCelular}" 
-						required="true" requiredMessage="Celular ser preenchido"/>
+					<p:inputText id="itDDDCel" value="#{cadastroMBean.cliente.nrDDDCelular}" maxlength="2"
+						required="true" requiredMessage="DDD Celular deve ser preenchido" />
+					<p:inputText id="itCelular" value="#{cadastroMBean.cliente.nrCelular}" maxlength="9" 
+						required="true" requiredMessage="Celular deve ser preenchido"/>
 					<p:outputLabel />
 
 
@@ -95,9 +95,9 @@
 					<p:outputLabel value="Telefone" for="itTelefone" />
 					<p:outputLabel />
 
-					<p:inputText id="itDDD"
+					<p:inputText id="itDDD" maxlength="2"
 						value="#{cadastroMBean.cliente.nrDDDTelefone}" />
-					<p:inputText id="itTelefone"
+					<p:inputText id="itTelefone" maxlength="8" 
 						value="#{cadastroMBean.cliente.nrTelefone}" />
 					<p:outputLabel />
 
@@ -105,9 +105,9 @@
 			        <h:outputLabel for="pwd2" value="Confirmação de Senha" />
 					<p:outputLabel />
 
-			        <p:inputText id="pwd1" value="#{cadastroMBean.cliente.txSenha1}"
+			        <p:inputText id="pwd1" value="#{cadastroMBean.cliente.txSenha1}" maxlength="50"
 			        	required="true" requiredMessage="Senha deve ser preenchida"/>
-			        <p:inputText id="pwd2" value="#{cadastroMBean.cliente.txSenha2}"
+			        <p:inputText id="pwd2" value="#{cadastroMBean.cliente.txSenha2}" maxlength="50"
 			        	required="true" requiredMessage="Confirmação de Senha deve ser preenchida"/>
 					<p:outputLabel />
 
@@ -122,7 +122,7 @@
 					<p:outputLabel value="Estado" for="cbEstado" />
 					<p:outputLabel value="Cidade" for="itCidade" />
 
-					<p:inputText id="itCep" value="#{cadastroMBean.endereco.nrCep}" 
+					<p:inputText id="itCep" value="#{cadastroMBean.endereco.nrCep}" maxlength="10" 
 						required="true" requiredMessage="CEP deve ser preenchido" />
 
 					<p:selectOneMenu id="cbEstado" value="#{cadastroMBean.endereco.sgEstado}"
@@ -132,23 +132,23 @@
 					</p:selectOneMenu>
 
 					<p:inputText id="itCidade"
-						value="#{cadastroMBean.endereco.nmCidade}" />
+						value="#{cadastroMBean.endereco.nmCidade}" maxlength="100"/>
 
 					<p:outputLabel value="Endereco" for="itEndereco" />
 					<p:outputLabel value="Numero" for="itNumero" />
 					<p:outputLabel value="Complemento" for="itComplemento" />
 
-					<p:inputText id="itEndereco"
+					<p:inputText id="itEndereco" maxlength="100"
 						value="#{cadastroMBean.endereco.dsEndereco}" />
-					<p:inputText id="itNumero"
+					<p:inputText id="itNumero" maxlength="5"
 						value="#{cadastroMBean.endereco.nrEndereco}" />
-					<p:inputText id="itComplemento"
+					<p:inputText id="itComplemento" maxlength="100"
 						value="#{cadastroMBean.endereco.dsComplemento}" />
 
 					<p:outputLabel value="Bairro" for="itBairro" />
 					<p:outputLabel />
 					<p:outputLabel />
-					<p:inputText id="itBairro"
+					<p:inputText id="itBairro" maxlength="100"
 						value="#{cadastroMBean.endereco.nmBairro}" />
 
 				</p:panelGrid>
@@ -165,13 +165,13 @@
 					<p:outputLabel value="Conta Corrente" for="itContaCorrente" />
 					<p:outputLabel value="Digito" for="itDigito" />
 
-					<p:inputText id="itInstituicaoFinanceira"
+					<p:inputText id="itInstituicaoFinanceira" maxlength="50"
 						value="#{cadastroMBean.conta.nmBanco}" />
-					<p:inputText id="itAgencia"
+					<p:inputText id="itAgencia" maxlength="10"
 						value="#{cadastroMBean.conta.nrAgencia}" />
-					<p:inputText id="itContaCorrente"
+					<p:inputText id="itContaCorrente" maxlength="20"
 						value="#{cadastroMBean.conta.nrConta}" />
-					<p:inputText id="itDigito" value="#{cadastroMBean.conta.nrDigito}" />
+					<p:inputText id="itDigito" value="#{cadastroMBean.conta.nrDigito}" maxlength="2"/>
 
 				</p:panelGrid>
 			</p:fieldset>
@@ -185,9 +185,9 @@
 						<p:outputLabel value="Placa" for="itPlaca" />
 	
 						<p:inputText id="itTag"	disabled="true" value="#{cadastroMBean.tag.cdTag}"/>
-						<p:inputText id="itMarca"	value="#{cadastroMBean.tag.veiculo.nmMarca}" />
-						<p:inputText id="itModelo"	value="#{cadastroMBean.tag.veiculo.nmModelo}" />
-						<p:inputText id="itPlaca"	value="#{cadastroMBean.tag.veiculo.nrPlaca}" />
+						<p:inputText id="itMarca"	value="#{cadastroMBean.tag.veiculo.nmMarca}" maxlength="50"/>
+						<p:inputText id="itModelo"	value="#{cadastroMBean.tag.veiculo.nmModelo}" maxlength="50"/>
+						<p:inputText id="itPlaca"	value="#{cadastroMBean.tag.veiculo.nrPlaca}" maxlength="8"/>
 					</p:panelGrid>
 	
 
@@ -205,7 +205,8 @@
 				            Lista
 				        </f:facet>
 				        
-				        <p:commandLink update=":formCadastro:painelVeiculo tabelaVeiculos" title="Ver Detalhe" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px"
+				        <p:commandLink update=":formCadastro:painelVeiculo" title="Ver Detalhe" styleClass="ui-icon ui-icon-search" 
+				        	style="float:left;margin-right:10px" process="@this"
 				        	action="#{cadastroMBean.selecionaTag(tag)}"/>
 				        
 			            <h:outputText value="#{tag.veiculo.nmModelo}, #{tag.veiculo.nrPlaca}" style="display:inline-block"/>

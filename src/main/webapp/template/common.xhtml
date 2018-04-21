@@ -13,12 +13,14 @@
     <p:messages showSummary="false" showDetail="true" id="msg" autoUpdate="true"/>
 	<div id="container">
 		<nav class="menuCliente">
-		<ul class="menuClienteSub">
-			<li><a href="welcome.xhtml" class="btnHome" title="Home">HOME</a></li>
-			<li><a href="extrato.xhtml" class="btnExtrato" title="Extrato">Extrato</a></li>
-			<li><a href="cadastro.xhtml" class="btnCadastro" title="Cadastro">Cadastro</a></li>
-			<li><a href="lancamento.xhtml" class="btnLancamento" title="Lançamento">Lançamento</a></li>
-		</ul>
+			<h:form rendered="#{cpfLogado != null and cpfLogado.novo != true}">
+				<ul class="menuClienteSub">
+					<li><a href="welcome.xhtml" class="btnHome" title="Home">HOME</a></li>
+					<li><a href="extrato.xhtml" class="btnExtrato" title="Extrato">Extrato</a></li>
+					<li><a href="cadastro.xhtml" class="btnCadastro" title="Cadastro">Cadastro</a></li>
+					<li><a href="lancamento.xhtml" class="btnLancamento" title="Lançamento">Lançamento</a></li>
+				</ul>
+			</h:form>
 		</nav> 
 
         

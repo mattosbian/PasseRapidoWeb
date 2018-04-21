@@ -110,6 +110,14 @@ public class ContaBancaria {
 		return this.idCliente == null;
 	}
 	
-	
+	public boolean isAlgumCampoPreenchido() {
+		if ((this.nmBanco == null || this.nmBanco.isEmpty())
+			&& (this.nrAgencia == null || nrAgencia.isEmpty())  
+			&& (this.nrConta == null || this.nrConta.isEmpty()) 
+			&& nrDigito == null) {
+			return false;
+		}
+		return true;
+	}
 
 }

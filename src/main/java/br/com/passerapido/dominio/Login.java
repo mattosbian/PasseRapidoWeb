@@ -11,7 +11,6 @@ import br.com.passerapido.util.EntityManagerUtil;
 
 public class Login {
 	
-	//private long cpf;
 	private String cpf;
 	private String senha;
 	private boolean novo;

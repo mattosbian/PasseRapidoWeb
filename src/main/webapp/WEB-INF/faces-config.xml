@@ -8,4 +8,7 @@
    <default-locale>en</default-locale>
   </locale-config>
  </application>
+ <lifecycle>
+	<phase-listener>br.com.passerapido.listener.Autorizador</phase-listener>
+ </lifecycle>
 </faces-config>

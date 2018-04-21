@@ -44,7 +44,9 @@ public class Veiculo {
 	}
 	
 	public void validate() throws DominioException {
-		
+		if (this.nrPlaca == null || this.nrPlaca.isEmpty()) {
+			throw new DominioException("Placa deve ser preenchida");
+		}
 	}
 	
 	public Integer getCdVeiculo() {

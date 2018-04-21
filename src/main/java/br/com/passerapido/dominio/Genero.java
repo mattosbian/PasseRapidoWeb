@@ -1,8 +1,11 @@
 package br.com.passerapido.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.passerapido.entity.TbGenero;
 import br.com.passerapido.util.EntityManagerUtil;
@@ -21,7 +24,21 @@ public class Genero implements Serializable {
 		TbGenero tbGenero = em.find(TbGenero.class, id);
 		return new Genero(tbGenero);
 	}
-	
+
+	public static List<Genero> buscaTodos() {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		TypedQuery<TbGenero> query = em.createNamedQuery(TbGenero.TODOS, TbGenero.class);
+		List<TbGenero> tbList = query.getResultList();
+		
+		List<Genero> list = new ArrayList<Genero>();
+		
+		for(TbGenero t : tbList) {
+			list.add(new Genero(t));
+		}
+		
+		return list;
+	}
+
 	public Genero(TbGenero tbGenero) {
 		this.cdGenero = tbGenero.getCdGenero();
 		this.dsGenero = tbGenero.getDsGenero();

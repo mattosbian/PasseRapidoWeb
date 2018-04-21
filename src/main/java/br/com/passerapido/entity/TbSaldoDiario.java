@@ -1,22 +1,27 @@
 package br.com.passerapido.entity;
 
-import java.io.Serializable;
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries ({
+	@NamedQuery(name=TbSaldoDiario.POR_TAG_DATA, query="select t from TbSaldoDiario t where t.pk.dtSaldo = :dtSaldo "
+			+ "and t.pk.cdTag = :cdTag")
+})
 @Table(name="TB_SALDO_DIARIO")
 public class TbSaldoDiario {
+
+	public static final String POR_TAG_DATA = "br.com.passerapido.entity.TbSaldoDiario.POR_TAG_DATA";
 
 	@EmbeddedId
 	private PKTbSaldoDiario pk;
 
 	@Column(name="VL_SALDO")
-	private Integer vlSaldo; //NUMBER(8,2)
+	private double vlSaldo; 
 
 	public PKTbSaldoDiario getPk() {
 		return pk;
@@ -26,11 +31,11 @@ public class TbSaldoDiario {
 		this.pk = pk;
 	}
 
-	public Integer getVlSaldo() {
+	public double getVlSaldo() {
 		return vlSaldo;
 	}
 
-	public void setVlSaldo(Integer vlSaldo) {
+	public void setVlSaldo(double vlSaldo) {
 		this.vlSaldo = vlSaldo;
 	}
 	

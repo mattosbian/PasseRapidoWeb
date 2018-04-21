@@ -18,28 +18,28 @@ public class TbEndereco {
 
 	@Id
 	@Column(name="ID_CLIENTE")
-	private Integer idCliente;	//NUMBER
+	private Integer idCliente;	
 	
 	@Column(name="SG_ESTADO")
-	private String sgEstado;	//VARCHAR2(2 BYTE)
+	private String sgEstado;
 	
 	@Column(name="NR_CEP")
-	private String nrCep;	//VARCHAR2(10 BYTE)
+	private String nrCep;
 	
 	@Column(name="NM_CIDADE")
-	private String nmCidade;	//VARCHAR2(100 BYTE)
+	private String nmCidade;
 	
 	@Column(name="NM_BAIRRO")
-	private String nmBairro;	//VARCHAR2(100 BYTE)
+	private String nmBairro;	
 	
 	@Column(name="DS_ENDERECO")
-	private String dsEndereco;	//VARCHAR2(100 BYTE)
+	private String dsEndereco;	
 	
 	@Column(name="NR_ENDERECO")
-	private Integer nrEndereco;	//NUMBER(5,0)
+	private Integer nrEndereco;	
 	
 	@Column(name="DS_COMPLEMENTO")
-	private String dsComplemento;	//VARCHAR2(100 BYTE)
+	private String dsComplemento;	
 
 	public Integer getIdCliente() {
 		return idCliente;

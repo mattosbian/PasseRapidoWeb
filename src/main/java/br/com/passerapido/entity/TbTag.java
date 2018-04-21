@@ -13,32 +13,35 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-
 @Entity
 @Table(name="TB_TAG")
 @NamedQueries( {
-		@NamedQuery(name=TbTag.POR_ID_CLIENTE, query="Select t from TbTag t inner join t.tbVeiculo v where v.idCliente = :idCliente")
+		@NamedQuery(name=TbTag.POR_ID_CLIENTE_ATIVOS, query="Select t from TbTag t inner join t.tbVeiculo v "
+				+ "where v.idCliente = :idCliente "
+				+ "and t.flAtivo = 1")
+		,@NamedQuery(name=TbTag.POR_ID_CLIENTE_TODOS, query="Select t from TbTag t inner join t.tbVeiculo v "
+				+ "where v.idCliente = :idCliente")
 		} )
 @SequenceGenerator(name="TbTagCd",sequenceName="SQ_TB_TAG_CD",initialValue=1,allocationSize=1)
 public class TbTag {
 
-	public static final String POR_ID_CLIENTE = "br.com.passerapido.entity.TbTag.POR_ID_CLIENTE";
+	public static final String POR_ID_CLIENTE_ATIVOS = "br.com.passerapido.entity.TbTag.POR_ID_CLIENTE_ATIVOS";
+	public static final String POR_ID_CLIENTE_TODOS = "br.com.passerapido.entity.TbTag.POR_ID_CLIENTE_TODOS";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="TbTagCd")
 	@Column(name="CD_TAG")
-	private Integer cdTag; //NUMBER
+	private Integer cdTag; 
 
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CD_VEICULO")
 	private TbVeiculo tbVeiculo;
 	
 	@Column(name="VL_SALDO")
-	private Integer vlSaldo; //NUMBER(8,2)
+	private double vlSaldo; 
 
 	@Column(name="FL_ATIVO")
-	private Integer flAtivo; //NUMBER(1,0)
+	private Integer flAtivo; 
 
 	public Integer getCdTag() {
 		return cdTag;
@@ -48,19 +51,12 @@ public class TbTag {
 		this.cdTag = cdTag;
 	}
 
-//	public Integer getCdVeiculo() {
-//		return cdVeiculo;
-//	}
-//
-//	public void setCdVeiculo(Integer cdVeiculo) {
-//		this.cdVeiculo = cdVeiculo;
-//	}
 
-	public Integer getVlSaldo() {
+	public double getVlSaldo() {
 		return vlSaldo;
 	}
 
-	public void setVlSaldo(Integer vlSaldo) {
+	public void setVlSaldo(double vlSaldo) {
 		this.vlSaldo = vlSaldo;
 	}
 

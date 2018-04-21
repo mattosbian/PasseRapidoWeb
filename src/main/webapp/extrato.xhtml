@@ -6,74 +6,124 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-  <ui:composition template="/template/common.xhtml">
-   
-     <ui:define name="body">
-       
-       	<h5>Extrato</h5>
+<ui:composition template="/template/common.xhtml">
 
-        <h:panelGrid columns="4">
-           <p:outputLabel value="Veículo" styleClass="outputLabel"/>
-        
-        <h:panelGrid columns="2">
-           <p:selectOneMenu>
-              <f:selectItem itemLabel="Placa"/>
-           </p:selectOneMenu>
-           
-           <h:panelGrid columns="2">
-              <p:outputLabel value="Tag" styleClass="outputLabel"/>
-              <p:outputLabel value="Numero"/>
-           </h:panelGrid>
-           
-        </h:panelGrid>
-        
-        <p:spacer width="500" height="10"> </p:spacer>
-        
-         <h:panelGrid columns="1">
-           <p:outputLabel value="Saldo Atual" styleClass="outputLabel"/>
-           <p:outputLabel value="100" styleClass="outputSaldo"/>
-        </h:panelGrid>  
-      
-        </h:panelGrid>  
-        
-        
-        <p:panel header="Filtros">
-     
+	<ui:define name="body">
+		<h:form>
+
+			<h5>Extrato</h5>
+
+			<h:panelGrid columns="4">
+				<p:outputLabel value="Veículo" styleClass="outputLabel" />
+
+				<h:panelGrid columns="2">
+					<p:selectOneMenu id="cbTag" value="#{extratoMBean.tag}"
+						converter="TagToString" required="true" requiredMessage="Veículo deve ser preenchido">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItems value="#{extratoMBean.tags}" var="tag"
+							itemLabel="#{tag.veiculo.nrPlaca}" itemValue="#{tag}" />
+						<p:ajax event="change" process="cbTag" update="olTag olSaldo olStatusTag" />
+					</p:selectOneMenu>
+
+					<h:panelGrid columns="5">
+						<p:outputLabel value="Tag" styleClass="outputLabel" />
+						<p:outputLabel id="olTag" value="#{extratoMBean.tag.cdTag}"
+							styleClass="outputSaldo" />
+
+						<p:spacer width="50" height="0" />
+
+						<p:outputLabel value="Status" styleClass="outputLabel" />
+						<p:outputLabel id="olStatusTag" value="#{extratoMBean.tagAtiva()}" 
+								styleClass="outputLabel" />
+					</h:panelGrid>
+
+				</h:panelGrid>
+
+				<p:spacer width="320" height="10" />
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Saldo Atual" styleClass="outputLabel" />
+					<p:outputLabel id="olSaldo" value="#{extratoMBean.tag.vlSaldo}"
+						styleClass="outputSaldo" />
+				</h:panelGrid>
+
+			</h:panelGrid>
 
 
-			<h:panelGrid columns="3">
+			<p:panel header="Filtros">
+
+				<h:panelGrid columns="5">
+
+					<p:outputLabel value="Tipo Transação" styleClass="outputLabel" />
+					<p:outputLabel value="Período" styleClass="outputLabel" />
+					<p:outputLabel value="Data Inicial" styleClass="outputLabel" />
+					<p:outputLabel value="Data Final" styleClass="outputLabel" />
+					<h:outputLabel />
+
+					<p:selectOneMenu value="#{extratoMBean.tipoTransacao}"
+						converter="TipoTransacaoToString">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<f:selectItems value="#{extratoMBean.tiposTransacao}" var="tipo"
+							itemLabel="#{tipo.nmTipoTransacao}" itemValue="#{tipo}" />
+					</p:selectOneMenu>
+
+					<p:selectOneMenu id="cbPeriodo"
+						value="#{extratoMBean.periodoSelecionado}">
+						<f:selectItem itemLabel="7 dias" itemValue="7"
+							styleClass="outputLabel" />
+						<f:selectItem itemLabel="15 dias" itemValue="15"
+							styleClass="outputLabel" />
+						<f:selectItem itemLabel="30 dias" itemValue="30"
+							styleClass="outputLabel" />
+						<f:selectItem itemLabel="Especifique período" itemValue="99"
+							styleClass="outputLabel" />
+
+						<p:ajax event="change" process="cbPeriodo" update="itDataInicial itDataFinal" />
+					</p:selectOneMenu>
+
+					<p:calendar id="itDataInicial" required="true" requiredMessage="Data Inicial deve ser preenchida"
+						value="#{extratoMBean.dtInicial.time}"
+						pattern="dd/MM/yyyy" mask="true"
+						disabled="#{extratoMBean.desabilitaData()}" />
+
+					<p:calendar id="itDataFinal" required="true" requiredMessage="Data Final deve ser preenchida"
+						value="#{extratoMBean.dtFinal.time}" pattern="dd/MM/yyyy"
+						mask="true" disabled="#{extratoMBean.desabilitaData()}" />
+
+
+					<p:commandButton value="filtrar" styleClass="btnMigrarPlano" 
+						action="#{extratoMBean.listar}" process="@form" update="tabExtrato" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:dataTable id="tabExtrato" value="#{extratoMBean.listaExtrato}" var="extrato" >
 			
-			    <p:outputLabel value="Tipo Transação" styleClass="outputLabel"/>
-			    <p:outputLabel value="Período" styleClass="outputLabel"/>
-			    <h:outputLabel/>
+				<p:column headerText="Data Lançamento">
+					<h:outputText value="#{extrato.dtTransacao}"/>
+				</p:column>
+				
+				<p:column headerText="Tipo Lançamento" >
+					<h:outputText value="#{extrato.tipoTransacao.nmTipoTransacao}"/>
+				</p:column>
+				
+				<p:column headerText="Crédito" >
+					<h:outputText value="#{extrato.vlCredito}" />
+				</p:column>
 
-			 
-			    
-			    <p:selectOneMenu>
-			      <f:selectItem itemLabel="Selecione"/>
-			      <f:selectItem itemLabel="Recarga"/>
-			      <f:selectItem itemLabel="Pedagio"/>
-			      <f:selectItem itemLabel="Estacionamento"/>	
-			    </p:selectOneMenu>			    
-			    
-			    <p:selectOneMenu>
-			      <f:selectItem itemLabel="Ultimas Transações" styleClass="outputLabel"/>
-			    </p:selectOneMenu>	
-			    
-			    <p:button value="filtrar" styleClass="btnMigrarPlano"></p:button>		    
-			 </h:panelGrid>   
-   </p:panel>
-			
-			<p:dataTable>
-			   <p:column headerText="Data Lançamento"/>
-			   <p:column headerText="Descrição Lançamento"/>
-			   <p:column headerText="Crédito"/>
-			   <p:column headerText="Débito"/>
-			   <p:column headerText="Saldo"/>
+				<p:column headerText="Débito" >
+					<h:outputText value="#{extrato.vlDebito}"/>
+				</p:column>
+
+				<p:column headerText="Saldo" >
+					<h:outputText value="#{extrato.vlSaldo}"/>
+				</p:column>
+
 			</p:dataTable>
-                  
-     </ui:define>
-  </ui:composition>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
 
 
 

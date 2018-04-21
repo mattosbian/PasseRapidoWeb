@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.passerapido.entity.TbCliente;
 import br.com.passerapido.entity.TbTag;
 import br.com.passerapido.exception.DominioException;
 import br.com.passerapido.util.EntityManagerUtil;
@@ -21,7 +20,7 @@ public class Tag implements Serializable{
 	
 	private Integer cdTag;
 	private Veiculo veiculo;
-	private Integer vlSaldo;
+	private double vlSaldo;
 	private Integer flAtivo;
 
 	public Tag() {
@@ -81,23 +80,31 @@ public class Tag implements Serializable{
 
 	}
 
-	public void carregar(Integer valor) throws DominioException {
-		if (valor == null || valor <= 0 ) {
-			throw new DominioException("Valor de recarga deve ser maior que zero");	
-		}
-		
-		if (this.vlSaldo == null) {
-			this.vlSaldo = 0;
+	public void creditaSaldo(double valor) throws DominioException {
+		if (valor <= 0 ) {
+			throw new DominioException("Valor de crédito deve ser maior que zero");	
 		}
 		
 		this.vlSaldo += valor;
 	}
-	
-	public static List<Tag> buscaPorIdCliente(Integer idCliente){
+
+	public void debitaSaldo(double valor) throws DominioException {
+		if (valor <= 0 ) {
+			throw new DominioException("Valor de débito deve ser maior que zero");	
+		}
 		
+		if (this.vlSaldo < valor) {
+			throw new DominioException("Saldo insuficiente");
+		}
+		
+		this.vlSaldo -= valor;
+	}
+
+	
+	public static List<Tag> buscaPorIdClienteAtivas(Integer idCliente) {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		
-		TypedQuery<TbTag> query = em.createNamedQuery(TbTag.POR_ID_CLIENTE, TbTag.class);
+		TypedQuery<TbTag> query = em.createNamedQuery(TbTag.POR_ID_CLIENTE_ATIVOS, TbTag.class);
 		
 		query.setParameter("idCliente", idCliente);
 		
@@ -105,13 +112,27 @@ public class Tag implements Serializable{
 		
 		List<Tag> tags = new ArrayList<Tag>();
 		
-		System.out.println("Tag lista TbTags:" + tbTags.size());
-		
 		for (TbTag tb : tbTags) {
 			tags.add(new Tag(tb));
 		}
 
-		System.out.println("Tag lista Tags:" + tags.size());
+		return tags;
+	}
+
+	public static List<Tag> buscaPorIdCliente(Integer idCliente) {
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		
+		TypedQuery<TbTag> query = em.createNamedQuery(TbTag.POR_ID_CLIENTE_TODOS, TbTag.class);
+		
+		query.setParameter("idCliente", idCliente);
+		
+		List<TbTag> tbTags = query.getResultList();
+		
+		List<Tag> tags = new ArrayList<Tag>();
+		
+		for (TbTag tb : tbTags) {
+			tags.add(new Tag(tb));
+		}
 
 		return tags;
 	}
@@ -135,7 +156,7 @@ public class Tag implements Serializable{
 		return flAtivo==1;
 	}
 
-	public Integer getVlSaldo() {
+	public double getVlSaldo() {
 		return vlSaldo;
 	}
 
@@ -173,5 +194,11 @@ public class Tag implements Serializable{
 		
 	}
 
-	
+	public boolean isPreenchido() {
+		return this.cdTag != null;
+	}
+
+	public void desativa() {
+		this.flAtivo = 0;
+	}
 }

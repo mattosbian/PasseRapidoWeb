@@ -21,21 +21,21 @@ public class Cliente {
 	
 	private String nmCompletoMae;
 	
-	private Integer nrDDDCelular;	//NUMBER(2,0)
+	private Integer nrDDDCelular;
 	
-	private Integer nrCelular; //NUMBER(9,0)
+	private Integer nrCelular; 
 	
-	private Integer nrDDDTelefone; //	NUMBER(2,0)
+	private Integer nrDDDTelefone; 
 	
-	private Integer nrTelefone;	//NUMBER(8,0)
+	private Integer nrTelefone;	
 
-	private String cdsCPF;	//NUMBER(8,0)
-
-	private String cdsRG;	//NUMBER(8,0)
-
-	private Genero genero; //NUMBER(1,0)
+	private String cdsCPF;	
 	
-	private EstadoCivil estadoCivil; //	NUMBER(1,0)
+	private String cdsRG;	
+
+	private Genero genero; 
+	
+	private EstadoCivil estadoCivil; 
 	
 	private String txSenha1;
 	
@@ -45,7 +45,6 @@ public class Cliente {
 	
 	private String dsEmail2;
 
-	//private ContaBancaria contaBancaria; //ja estava
 	
 	public Cliente() {
 		this.dtNascimento = Calendar.getInstance();

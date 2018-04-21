@@ -18,10 +18,10 @@ public class TbEstado {
 	
 	@Id
 	@Column(name="SG_ESTADO")
-	private String sgEstado; //VARCHAR2(2 BYTE)
+	private String sgEstado; 
 
 	@Column(name="NM_ESTADO")
-	private String nmEstado; //VARCHAR2(30 BYTE)
+	private String nmEstado; 
 
 	public String getSgEstado() {
 		return sgEstado;

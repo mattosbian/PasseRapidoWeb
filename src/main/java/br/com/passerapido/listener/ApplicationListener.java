@@ -22,7 +22,7 @@ public class ApplicationListener implements ServletContextListener {
         if (emf!= null) {
         	emf.close();
         }
-        logger.info("Fï¿½brica de Entitymanager fechada");
+        logger.info("Fábrica de Entitymanager fechada");
 		
 	}
 
@@ -31,7 +31,7 @@ public class ApplicationListener implements ServletContextListener {
 		
 		emf = Persistence.createEntityManagerFactory("PasseRapidoWeb");
 		e.getServletContext().setAttribute(EMF, emf);
-		logger.info("Fï¿½brica de Entitymanager carregada com sucesso");
+		logger.info("Fábrica de Entitymanager carregada com sucesso");
 		
     }
 

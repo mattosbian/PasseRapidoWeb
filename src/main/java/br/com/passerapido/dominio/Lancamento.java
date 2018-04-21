@@ -1,71 +1,70 @@
 package br.com.passerapido.dominio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 
-import br.com.passerapido.entity.TbCliente;
-import br.com.passerapido.entity.TbEstado;
-import br.com.passerapido.entity.TbEstadoCivil;
-import br.com.passerapido.entity.TbGenero;
+import br.com.passerapido.entity.TbSaldoDiario;
 import br.com.passerapido.entity.TbTag;
-import br.com.passerapido.exception.CadastroException;
+import br.com.passerapido.entity.TbTransacao;
 import br.com.passerapido.exception.DominioException;
 import br.com.passerapido.util.EntityManagerUtil;
 
 public class Lancamento {
 	
 	private List<Tag> tags;
+	private List<TipoTransacao> tipos;
 	
-	private Tag tag;
-	
-	private void inicio() {
-		this.tags = new ArrayList<Tag>();
-		this.tag = new Tag();
-	}
+	private Transacao transacao;
 	
 	public Lancamento(Login login) {
-		
-		if (login == null) {
-			inicio();
-		} else {
+		if (login != null) {
 			carregaDados(login.getCpf());
 		}
 		
+		carregaCombo();
 	}
 
+	private void carregaCombo() {
+		this.tipos = TipoTransacao.buscaTodosNaoSistema();
+	}
+
+	
 	private void carregaDados(String cpf) {
 		Cliente cliente = Cliente.buscaPorCPF(cpf);
 		
-		this.tags = Tag.buscaPorIdCliente(cliente.getId());
+		this.tags = Tag.buscaPorIdClienteAtivas(cliente.getId());
 	}
 	
 
-	public void recarregar(Integer valor) throws DominioException  {
-		EntityManager em = EntityManagerUtil.getEntityManager();
-		
-		try {
-			this.tag.carregar(valor);
-			
-			System.out.println("Lancamento saldoAtualizado :" + this.tag.getVlSaldo());
-			//endereco.validate();
+	public void salvar() throws DominioException  {
 
-			TbTag tbTag= getTag().toEntity();
-			
-			//TbContaBancaria tbContaBancaria = conta.toEntity();
-			
+		EntityManager em = EntityManagerUtil.getEntityManager();
+
+		try {
+			transacao.validate();
+			transacao.atualizaSaldo();
+
+			TbTransacao tbTran = transacao.toEntity();
+			TbTag tbTag = transacao.getTag().toEntity();
+			TbSaldoDiario tbSaldo = transacao.getSaldoDiario().toEntity();
+
 			em.getTransaction().begin();
-			
+
+			em.persist(tbTran);
 			tbTag = em.merge(tbTag);
 
+			if (transacao.isSaldoDiarioNovo()) {
+				em.persist(tbSaldo);
+			} else {
+				tbSaldo = em.merge(tbSaldo);
+			}
+
 			em.getTransaction().commit();
+
 		
 		} catch (DominioException e) {
-			System.out.println("lancamento - erro");
 			throw new DominioException(e.getMessage(), e);
 		} catch (PersistenceException e) {
            em.getTransaction().rollback();             
@@ -81,12 +80,17 @@ public class Lancamento {
 		this.tags = tags;
 	}
 
-	public Tag getTag() {
-		return tag;
+	public List<TipoTransacao> getTipos() {
+		return tipos;
 	}
 
-	public void setTag(Tag tag) {
-		this.tag = tag;
+	public Transacao getTransacao() {
+		return transacao;
 	}
+
+	public void setTransacao(Transacao transacao) {
+		this.transacao = transacao;
+	}
+
 
 }

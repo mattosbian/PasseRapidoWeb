@@ -47,31 +47,31 @@ public class TbCliente {
 	private String nmCompletoMae;
 	
 	@Column(name="nr_ddd_celular")
-	private Integer nrDddCelular;	//NUMBER(2,0)
+	private Integer nrDddCelular;
 	
 	@Column(name="nr_celular")
-	private Integer nrCelular; //NUMBER(9,0)
+	private Integer nrCelular; 
 	
 	@Column(name="nr_ddd_telefone")
-	private Integer nrDddTelefone; //	NUMBER(2,0)
+	private Integer nrDddTelefone; 
 	
 	@Column(name="nr_telefone")
-	private Integer nrTelefone;	//NUMBER(8,0)
+	private Integer nrTelefone;	
 	
 	@Column(name="cd_genero")
-	private Integer cdGenero; //NUMBER(1,0)
+	private Integer cdGenero; 
 	
 	@Column(name="cd_estado_civil")
-	private Integer cdEstadoCivil; //	NUMBER(1,0)
+	private Integer cdEstadoCivil; 
 	
 	@Column(name="tx_senha")
-	private String txSenha;	//VARCHAR2(50 BYTE)
+	private String txSenha;	
 
 	@Column(name="cds_cpf")
-	private String cdsCPF;	//VARCHAR2(15 BYTE)
+	private String cdsCPF;	
 	
 	@Column(name="cds_rg")
-	private String cdsRG;	//VARCHAR2(15 BYTE)
+	private String cdsRG;	
 	
 	@Column(name="ds_email")
 	private String dsEmail;
@@ -195,11 +195,6 @@ public class TbCliente {
 	public void setDsEmail(String dsEmail) {
 		this.dsEmail = dsEmail;
 	}
-	
-//	public void setNome(String nome) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 	
 
 }

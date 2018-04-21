@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/common.xhtml">
+
+	<ui:define name="body">
+
+		<h5>Desabilita</h5>
+
+		<h:form>
+
+			<p:panel header="Desabilitar" >
+	
+				<p:panelGrid columns="3" styleClass="fundoSaldo" >
+	
+					<p:outputLabel value="Veículo" />
+		            <p:outputLabel value="Tag" />
+		            <p:outputLabel value="Saldo Atual" />
+	
+					<p:selectOneMenu id="cbPlaca" value="#{desabilitaMBean.tag}"
+						converter="TagToString">
+						<f:selectItem itemLabel="Selecione Placa" itemValue="" />
+						<f:selectItems value="#{desabilitaMBean.tagsDe}" var="tagD"
+							itemLabel="#{tagD.veiculo.nrPlaca}" itemValue="#{tagD}" />
+						<p:ajax event="change" update="@form" process="@this" />
+					</p:selectOneMenu>
+		
+		            <p:outputLabel value="#{desabilitaMBean.tag.cdTag}" id="itTag" styleClass="outputSaldo"/>
+		
+		            <p:outputLabel value="#{desabilitaMBean.tag.vlSaldo}" id="itSaldoAtual" styleClass="outputSaldo"/>
+				
+				</p:panelGrid>
+			
+			</p:panel>
+	
+			<p:panel header="Transferir saldo para">
+			
+				<p:panelGrid columns="3" styleClass="fundoSaldo" >
+				
+					<p:outputLabel value="Veículo" />
+		            <p:outputLabel value="Tag" />
+		            <p:outputLabel value="Saldo Atual" />
+			            
+			        <p:selectOneMenu id="cbPlacaTo" value="#{desabilitaMBean.tagPara}" 
+			        	disabled="#{desabilitaMBean.desabilitaParaTransferir()}" converter="TagToString">
+							<f:selectItem itemLabel="Selecione Placa" itemValue="" />
+							<f:selectItems value="#{desabilitaMBean.tagsPara}" var="tagP"
+								itemLabel="#{tagP.veiculo.nrPlaca}" itemValue="#{tagP}" />
+							<p:ajax event="change" update="itTagTo itSaldoAtualTo" process="@this"/>
+					</p:selectOneMenu>
+		
+		            <p:outputLabel value="#{desabilitaMBean.tagPara.cdTag}" id="itTagTo" styleClass="outputSaldo"/>
+		
+		            <p:outputLabel value="#{desabilitaMBean.tagPara.vlSaldo}" id="itSaldoAtualTo" styleClass="outputSaldo"/>  
+		            
+				</p:panelGrid>
+		            
+			</p:panel>
+				
+		<p:commandButton value="OK" styleClass="btnEntrar" action="#{desabilitaMBean.salvar}" update="@form" ajax="false"/>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+
+
+</html>

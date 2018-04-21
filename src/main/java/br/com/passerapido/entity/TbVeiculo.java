@@ -16,19 +16,19 @@ public class TbVeiculo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="TbVeiculoCd")
 	@Column(name="CD_VEICULO")
-	private Integer cdVeiculo; //NUMBER(4,0)
+	private Integer cdVeiculo; 
 
 	@Column(name="ID_CLIENTE")
-	private Integer idCliente; //NUMBER
+	private Integer idCliente;
 
 	@Column(name="NM_MARCA")
-	private String nmMarca; //VARCHAR2(50 BYTE)
+	private String nmMarca; 
 
 	@Column(name="NM_MODELO")
-	private String nmModelo; //VARCHAR2(50 BYTE)
+	private String nmModelo; 
 
 	@Column(name="NR_PLACA")
-	private String nrPlaca; //VARCHAR2(8 BYTE)
+	private String nrPlaca; 
 
 	public Integer getCdVeiculo() {
 		return cdVeiculo;
