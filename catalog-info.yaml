@@ -5,7 +5,7 @@ metadata:
   annotations:
     forms.office.com/feedback: https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__thG11RUN1FFSU1OSEFaOEtFQVlaNkJWOE1MVkNOSS4u
 spec:
-  type: website
-  lifecycle: experimental
+  type: service
+  lifecycle: development
   owner: guests
   system: examples
