@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: example-website
+  name: example-forms
   annotations:
     forms.office.com/feedback: https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__thG11RUN1FFSU1OSEFaOEtFQVlaNkJWOE1MVkNOSS4u
 spec:
