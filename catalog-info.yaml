@@ -24,6 +24,7 @@ spec:
   system: examples
   dependencyOf:
     - component:example-forms
+    - system:c4-desenho-solucao
 
 ---
 apiVersion: backstage.io/v1alpha1
