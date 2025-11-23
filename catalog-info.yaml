@@ -49,11 +49,11 @@ spec:
   lifecycle: development
   owner: guests
   dependsOn:
-    - component:stock
-    - component:price
-    - component:product    
+    - component:default/stock
+    - component:default/price
+    - component:default/product    
   dependencyOf:
-    - component:stock
-    - component:price
-    - component:product 
+    - component:default/stock
+    - component:default/price
+    - component:default/product 
      
