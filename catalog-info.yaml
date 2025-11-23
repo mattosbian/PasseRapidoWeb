@@ -44,6 +44,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: c4-desenho-solucao-3
+  annotations:
 spec:
   type: service
   lifecycle: development
