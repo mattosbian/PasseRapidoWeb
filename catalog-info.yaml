@@ -58,7 +58,7 @@ metadata:
   name: c4-desenho-solucao-3
   annotations:
 spec:
-  type: service
+  type: documentation
   lifecycle: development
   owner: guests
   system: tetinha
