@@ -24,7 +24,6 @@ spec:
   system: examples
   dependencyOf:
     - component:example-forms
-    - system:c4-desenho-solucao
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -49,8 +48,8 @@ spec:
   type: documentation
   lifecycle: development
   owner: guests
-  dependencyOf:
-    - component:stock
-    - component:examples/price
+  dependsOn:
+    - stock
+    - price
     - product    
 
