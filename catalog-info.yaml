@@ -50,7 +50,7 @@ spec:
   type: documentation
   lifecycle: development
   owner: guests
-  
+
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
