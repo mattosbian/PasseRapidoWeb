@@ -62,7 +62,7 @@ spec:
   lifecycle: development
   owner: guests
   system: tetinha
-  dependencyOf:
+  dependsOn:
     - component:stock
     - component:price
     - component:product    
