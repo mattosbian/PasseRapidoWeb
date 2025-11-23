@@ -41,7 +41,7 @@ spec:
     - component:price     
 ---
 apiVersion: backstage.io/v1alpha1
-kind: System
+kind: Component
 metadata:
   name: c4-desenho-solucao
 spec:
