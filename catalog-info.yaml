@@ -52,4 +52,8 @@ spec:
     - stock
     - price
     - product    
-
+  dependencyOf:
+    - stock
+    - price
+    - product 
+     
