@@ -9,3 +9,35 @@ spec:
   lifecycle: development
   owner: guests
   system: examples
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: price
+  annotations:
+    forms.office.com/feedback: https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__thG11RUN1FFSU1OSEFaOEtFQVlaNkJWOE1MVkNOSS4u
+spec:
+  type: service
+  lifecycle: development
+  owner: guests
+  system: examples
+  dependsOn:
+      - component:example-forms
+
+---
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: product
+  annotations:
+    forms.office.com/feedback: https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__thG11RUN1FFSU1OSEFaOEtFQVlaNkJWOE1MVkNOSS4u
+spec:
+  type: service
+  lifecycle: development
+  owner: guests
+  system: examples
+  dependsOn:
+      - component:price     
