@@ -48,12 +48,9 @@ spec:
   type: documentation
   lifecycle: development
   owner: guests
-  dependsOn:
-    - component:default/stock
-    - component:default/price
-    - component:default/product    
-  dependencyOf:
-    - component:default/stock
-    - component:default/price
-    - component:default/product 
+  partOf:
+    - component:stock
+    - component:price
+    - component:product    
+
      
