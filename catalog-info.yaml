@@ -49,6 +49,7 @@ spec:
   type: service
   lifecycle: development
   owner: guests
+  system: examples
   dependencyOf:
     - component:stock
     - component:price
