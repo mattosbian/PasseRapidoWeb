@@ -49,7 +49,7 @@ spec:
   type: service
   lifecycle: development
   owner: guests
-  system: examples
+  system: tetinha
   dependencyOf:
     - component:stock
     - component:price
