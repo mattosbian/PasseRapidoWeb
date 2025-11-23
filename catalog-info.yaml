@@ -11,7 +11,6 @@ spec:
   system: examples
 
 ---
-
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -27,7 +26,6 @@ spec:
       - component:example-forms
 
 ---
-
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
