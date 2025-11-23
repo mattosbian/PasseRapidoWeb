@@ -39,3 +39,18 @@ spec:
   system: examples
   dependencyOf:
       - component:price     
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: c4-desenho-solucao
+spec:
+  type: documentation
+  lifecycle: development
+  owner: guests
+  system: examples
+  dependsOn:
+      - component:stock
+      - component:price
+      - component:product    
+
