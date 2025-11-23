@@ -41,6 +41,11 @@ spec:
     - component:price     
 ---
 apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: tetinha
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: c4-desenho-solucao-3
