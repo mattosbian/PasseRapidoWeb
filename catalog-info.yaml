@@ -23,7 +23,7 @@ spec:
   owner: guests
   system: examples
   dependencyOf:
-      - component:example-forms
+    - component:example-forms
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -38,7 +38,7 @@ spec:
   owner: guests
   system: examples
   dependencyOf:
-      - component:price     
+    - component:price     
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -48,9 +48,8 @@ spec:
   type: documentation
   lifecycle: development
   owner: guests
-  system: examples
   dependencyOf:
-      - component:stock
-      - component:price
-      - component:product    
+    - component:stock
+    - component:price
+    - component:product    
 
