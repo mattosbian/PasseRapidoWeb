@@ -50,7 +50,7 @@ spec:
   lifecycle: development
   owner: guests
   dependencyOf:
-    - component:examples/stock
+    - component:stock
     - component:examples/price
-    - component:examples/product    
+    - product    
 
