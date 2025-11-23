@@ -45,7 +45,7 @@ kind: Component
 metadata:
   name: c4-desenho-solucao-2
 spec:
-  type: documentation
+  type: service
   lifecycle: development
   owner: guests
   hasPart:
