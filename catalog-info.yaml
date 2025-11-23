@@ -57,6 +57,7 @@ kind: Component
 metadata:
   name: c4-desenho-solucao-3
   annotations:
+    orms.office.com/feedback: https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__thG11RUN1FFSU1OSEFaOEtFQVlaNkJWOE1MVkNOSS4u
 spec:
   type: service
   lifecycle: development
