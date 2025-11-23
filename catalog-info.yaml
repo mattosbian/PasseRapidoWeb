@@ -48,7 +48,7 @@ spec:
   type: service
   lifecycle: development
   owner: guests
-  dependsOn:
+  dependencyOf:
     - component:stock
     - component:price
     - component:product    
