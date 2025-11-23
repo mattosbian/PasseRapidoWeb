@@ -22,7 +22,7 @@ spec:
   lifecycle: development
   owner: guests
   system: examples
-  dependsOn:
+  dependencyOf:
       - component:example-forms
 
 ---
@@ -37,5 +37,5 @@ spec:
   lifecycle: development
   owner: guests
   system: examples
-  dependsOn:
+  dependencyOf:
       - component:price     

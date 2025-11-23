@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: stock
+  annotations:
+    forms.office.com/feedback: https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__thG11RUN1FFSU1OSEFaOEtFQVlaNkJWOE1MVkNOSS4u
+spec:
+  type: service
+  lifecycle: development
+  owner: guests
+  system: examples
+  dependencyOf:
+      - component:price     
