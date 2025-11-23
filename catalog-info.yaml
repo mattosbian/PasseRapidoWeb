@@ -49,7 +49,7 @@ spec:
   lifecycle: development
   owner: guests
   dependencyOf:
-    - component:stock
-    - component:price
-    - component:product    
+    - component:examples/stock
+    - component:examples/price
+    - component:examples/product    
 
