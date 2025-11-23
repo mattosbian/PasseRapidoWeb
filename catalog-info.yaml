@@ -47,8 +47,10 @@ metadata:
   name: tetinha
   description: Handy tools to keep artists in the loop
 spec:
-  owner: guest  
-
+  type: documentation
+  lifecycle: development
+  owner: guests
+  
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
